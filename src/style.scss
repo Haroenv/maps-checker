@@ -1,0 +1,55 @@
+---
+#sass after all
+---
+
+$sans-serif: -apple-system, system, sans-serif;
+$sans-serif: comic sans;
+$accent: #F00;
+
+/* General styling */
+html {
+	font-family: $sans-serif;
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+button {
+	// background-color: $dark;
+	// border: none;
+	// border-radius: .2em;
+  user-select: none;
+  cursor: pointer;
+}
+
+input {
+	padding: 0;
+}
+
+input {
+	width: 100%;
+}
+
+/* header */
+header {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+/* search bar */
+.search {
+	background-color: $accent;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+
+	&--element {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		// width: 40%;
+	}
+}
