@@ -3,16 +3,24 @@
 ---
 
 $sans-serif: -apple-system, system, sans-serif;
-$accent: #F00;
+$accent: #F44336;
+$light: #EFEFEF;
+$dark: #263238;
 
 /* General styling */
 html {
 	font-family: $sans-serif;
 	box-sizing: border-box;
+	color: $dark;
+	background-color: $light;
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+body {
+	margin: 0;
 }
 
 button {
@@ -22,6 +30,18 @@ button {
 
 input {
 	width: 100%;
+
+	&[type="search"] {
+		-moz-appearance: searchfield;
+	}
+}
+
+a {
+	color: #2196F3;
+
+	&:visited {
+		color: #3F51B5;
+	}
 }
 
 /* header */
@@ -31,12 +51,20 @@ header {
 	flex-direction: column;
 }
 
+h1 {
+	text-align: center;
+
+	a {
+		text-decoration: none;
+	}
+}
+
 /* search bar */
 .search {
 	background-color: $accent;
 	display: flex;
 	justify-content: center;
-	margin: 0 auto;
+	margin: 0;
 
 	&--element {
 		display: flex;
@@ -45,4 +73,27 @@ header {
 		margin: .5em;
 		width: percentage(1/3);
 	}
+}
+
+/* notice */
+
+.notice {
+	font-size: .8em;
+	background-color: #9E9E9E;
+	padding: .2rem;
+	margin: 0;
+	display: flex;
+/* don't show for now
+	*	&:before {
+	*		-webkit-appearance: searchfield-cancel-button;
+	*		content: '';
+	*		align-self: flex-end;
+	*	}
+	*/
+}
+
+/* content */
+
+.content {
+	margin: 1em;
 }
