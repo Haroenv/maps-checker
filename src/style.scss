@@ -21,6 +21,9 @@ html {
 
 body {
 	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 button {
@@ -82,18 +85,28 @@ h1 {
 	background-color: #9E9E9E;
 	padding: .2rem;
 	margin: 0;
+	flex: 0;
 	display: flex;
-/* don't show for now
-	*	&:before {
-	*		-webkit-appearance: searchfield-cancel-button;
-	*		content: '';
-	*		align-self: flex-end;
-	*	}
-	*/
+
+	&--close {
+		// -webkit-appearance: searchfield-cancel-button;
+		cursor: pointer;
+		user-select: none;
+		margin: .2em;
+	}
 }
+
 
 /* content */
 
 .content {
 	margin: 1em;
+	color: blue;
+	flex: 1;
+}
+
+/* footer */
+footer {
+	font-size: .8em;
+	text-align: center;
 }
