@@ -41,6 +41,7 @@
 
 	/**
 	 * Make the search results appear
+	 * todo: do the search
 	 */
 	var calculate = function() {
 		var search = document.querySelector('.search');
@@ -56,12 +57,10 @@
 	/**
 	 * Show the graph
 	 * TODO: populate
-	 * @return {[type]} [description]
 	 */
 	var graph = function() {
 		var now = new Date;
 		var data = {
-				// labels: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 				labels: [
 					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
 					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
@@ -103,11 +102,8 @@
 				}]
 		};
 		var options = {
-				// showScale: false,
 				bezierCurveTension: 0.3,
 				pointDot: false,
-				pointDotRadius: 4,
-				pointHitDetectionRadius: 20,
 				datasetStroke: false,
 				datasetStrokeWidth: 0,
 				datasetFill: true,
