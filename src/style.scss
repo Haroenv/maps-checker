@@ -47,12 +47,6 @@ a {
 	}
 }
 
-progress {
-	display: block;
-	margin: 0 auto;
-	width: 50%;
-}
-
 /* header */
 header {
 	background-color: $accent;
@@ -116,6 +110,17 @@ h1 {
 /* result window */
 .result {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&> * {
+		margin: .2em;
+	}
+}
+
+.graph {
+	width: 100% !important;
+	height: 30vh !important;
 }
 
 /* footer */
