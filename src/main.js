@@ -23,11 +23,11 @@
 		close.className += 'notice--close';
 		notice.className += 'notice';
 
-		if ("webkitAppearance" in document.body.style) {
-			close.style.webkitAppearance = "searchfield-cancel-button";
-		} else {
-			close.appendChild(document.createTextNode('✕'));
-		}
+		// if ("webkitAppearance" in document.body.style) {
+		// 	close.style.webkitAppearance = "searchfield-cancel-button";
+		// } else {
+		close.appendChild(document.createTextNode('✕'));
+		// }
 
 		document.body.insertBefore(notice, document.body.firstChild);
 
