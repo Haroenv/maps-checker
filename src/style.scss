@@ -117,6 +117,12 @@ h1 {
 	&> * {
 		margin: .2em;
 	}
+
+	&--number {
+		background-color: #fff;
+		padding: .2em;
+		border-radius: .2em;
+	}
 }
 
 .graph {
