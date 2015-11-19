@@ -92,7 +92,8 @@ h1 {
 	align-items: center;
 
 	&--close {
-		min-width: 1.25em;
+		width: 1.25em;
+		height: 1.25rem;
 		margin: 0 .5em;
 		cursor: pointer;
 		user-select: none;
@@ -120,7 +121,7 @@ h1 {
 
 .graph {
 	width: 100% !important;
-	height: 30vh !important;
+	height: 20em !important;
 }
 
 /* footer */
