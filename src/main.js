@@ -45,10 +45,17 @@
 	 */
 	var calculate = function() {
 		var search = document.querySelector('.search');
+		var from = document.getElementById('from').value;
+		var to = document.getElementById('to').value;
+		var mode = document.getElementById('mode').value;
 		// todo: find out why this works
 		var submit = search.getElementsByTagName('button')[0];
 		submit.addEventListener('click',function(){
-			notice('requested search');
+			//todo: save to localstorage
+			from = document.getElementById('from').value;
+			to = document.getElementById('to').value;
+			mode = document.getElementById('mode').value;
+			notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 		});
 	};
 
@@ -63,7 +70,9 @@
 		var estimate = results.querySelector('.result--number');
 		var log = results.querySelector('.result--button');
 		log.addEventListener('click',function(){
-			notice('logged ' + estimate.innerHTML);
+			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
+			//todo: save to localstorage
+			notice('logged ' + est);
 		});
 	}
 
