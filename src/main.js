@@ -55,6 +55,9 @@
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
+			window.localStorage.setItem('from',from);
+			window.localStorage.setItem('to',to);
+			window.localStorage.setItem('mode',mode);
 			notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 		});
 	};
@@ -62,8 +65,7 @@
 	calculate();
 
 	/**
-	 * logging your own
-	 * @return {[type]} [description]
+	 * logging your own estimate
 	 */
 	var log = function() {
 		var results = document.querySelector('.result');
@@ -72,11 +74,38 @@
 		log.addEventListener('click',function(){
 			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
 			//todo: save to localstorage
+			var data = JSON.parse(window.localStorage.getItem('data')) || [];
+			data.push({time: Date.now(),value: est});
+			window.localStorage.setItem('data',JSON.stringify(data));
 			notice('logged ' + est);
 		});
 	}
 
 	log();
+
+	/**
+	 * get the values the logs stored in localStorage
+	 * @return {array} the values
+	 */
+	var getDataValues = function() {
+		var data = [];
+		JSON.parse(window.localStorage.getItem('data')).forEach(function(e,i){
+			data.push(e.value);
+		});
+		return data;
+	}
+
+	/**
+	 * Get the times stored in localStorage
+	 * @return {array} the times a log occured
+	 */
+	var getDataTimes = function() {
+		var data = [];
+		JSON.parse(window.localStorage.getItem('data')).forEach(function(e,i){
+			data.push(e.time.getDate() + '-' + (e.time.getMonth() + 1) + ' ' + e.time.getHours() + ':' + e.time.getMinutes());
+		});
+		return data;
+	}
 
 	/**
 	 * Show the graph
@@ -85,38 +114,13 @@
 	var graph = function() {
 		var now = new Date;
 		var data = {
-				labels: [
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes(),
-					now.getDate()+'-'+(now.getMonth()+1)+' '+now.getHours()+':'+now.getMinutes()
-					],
+				labels: getDataTimes(),
 				datasets: [{
 						label: "Your data",
 						fillColor: "#F44336",
 						strokeColor: "#F44336",
 						pointHighlightFill: "#F44336",
-						data: [11,13,6,18,14,12,14,14,12,10,11,10,13,5,9,10,12,11,10,11,13,12,15,10]
+						data: getDataValues()
 				}, {
 						label: "Google Maps",
 						fillColor: "rgba(0,0,0,0)",
