@@ -19,6 +19,9 @@
 </head>
 
 <body>
+	<noscript>
+		<p class="notice"><span class="notice--close">✕</span> This site needs javascript to display the graph, look up the distance and saving the data. Please enable it. </p>
+	</noscript>
 	<header>
 		<h1><a href="">Maps Checker</a></h1>
 		<div class="search">
@@ -44,11 +47,12 @@
 		</div>
 	</header>
 	<div class="content">
-		<p>
-			This is a <a href="#">test for the sake of test</a>.
-		</p>
+		<div class="result">
+			<p class="result--number">250</p>
+			<button class="result--button">edit</button>
+		</div>
 		<progress indeterminate></progress>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quos non minus quaerat facere nemo saepe quisquam ea nisi quis inventore earum veritatis praesentium a rem voluptatibus tenetur, nostrum aperiam!</p>
+		<p>How accurate is Google Maps actually? Find out for yourself here! Search for an itinerary, and write down how much time you actually did on it. You can then compare that to Google's estimate.</p>
 		<canvas class="graph" id="myChart"></canvas>
 	</div>
 	<footer>
