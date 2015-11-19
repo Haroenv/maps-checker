@@ -36,7 +36,7 @@
 		});
 	};
 
-
+	// cookie notice
 	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 
 	/**
@@ -51,4 +51,17 @@
 	// set a progress of .5 to test it out.
 	progress(.5);
 
+	/**
+	 * Make the search results appear
+	 */
+	var calculate = function() {
+		var search = document.querySelector('.search');
+		// todo: find out why this works
+		// var submit = search.getElementsByTagName('button');
+		submit.addEventListener('click',function(){
+			notice('clicked');
+		});
+	};
+
+	calculate();
 // })();
