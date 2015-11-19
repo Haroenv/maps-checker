@@ -55,6 +55,7 @@ progress {
 
 /* header */
 header {
+	background-color: $accent;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -64,13 +65,13 @@ h1 {
 	text-align: center;
 
 	a {
+		color: $dark !important;
 		text-decoration: none;
 	}
 }
 
 /* search bar */
 .search {
-	background-color: $accent;
 	display: flex;
 	justify-content: center;
 	margin: 0;
@@ -93,12 +94,13 @@ h1 {
 	margin: 0;
 	flex: 0;
 	display: flex;
+	align-items: center;
 
 	&--close {
-		// -webkit-appearance: searchfield-cancel-button;
+		min-width: 1em;
+		margin: 0 .5em;
 		cursor: pointer;
 		user-select: none;
-		margin: .2em;
 	}
 }
 

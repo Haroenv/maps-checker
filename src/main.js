@@ -3,7 +3,7 @@
  * @author Haroen Viaene <hello@haroen.me>
  */
 
-(function() {
+// (function() {
 	//todo: remove in prod
 	console.log('Aight.');
 
@@ -36,5 +36,19 @@
 		});
 	};
 
+
 	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
-})();
+
+	/**
+	 * Set a certain level to the progress element
+	 * IMPORTANT: only one progress element per page.
+	 * @param  {float} level the level of the progress (0-1)
+	 */
+	var progress = function(level) {
+		document.getElementsByTagName('progress')[0].value = level;
+	};
+
+	// set a progress of .5 to test it out.
+	progress(.5);
+
+// })();

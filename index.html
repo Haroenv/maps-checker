@@ -3,51 +3,49 @@
 	Maps Checker is a checker for google maps travel time
 	compared to actual time.
 	@author Haroen Viaene <hello@haroen.me>
- -->
+-->
 <html lang="en">
+
 <head>
 	<title> Maps Checker </title>
 	<meta charset="utf-8" />
-	<!-- saying that the browser doesn't need to rescale on mobile -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="mobile-web-app-capable" content="yes" />
-	<!-- status bar in transparent/colour -->
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<!-- todo: color -->
-	<meta name="theme-color" content="#00000">
-	<!-- linking your CSS -->
+	<meta name="theme-color" content="#F44336">
 	<link rel="stylesheet" href="src/style.pre.css" />
-	<!-- favicon is best linked in your html too -->
 	<link rel="icon" type="image/png" href="/favicon.png" />
 </head>
+
 <body>
-<header>
-	<h1><a href="">Maps Checker</a></h1>
-	<div class="search">
-		<div class="search--element">
-			<label for="from">from</label>
-			<input type="search" placeholder="location" id="from">
+	<header>
+		<h1><a href="">Maps Checker</a></h1>
+		<div class="search">
+			<div class="search--element">
+				<label for="from">from</label>
+				<input type="search" placeholder="location" id="from">
+			</div>
+			<div class="search--element">
+				<label for="to">to</label>
+				<input type="search" placeholder="location" id="to">
+			</div>
+			<div class="search--element">
+				<button id="search">Search</button>
+			</div>
 		</div>
-		<div class="search--element">
-			<label for="to">to</label>
-			<input type="search" placeholder="location" id="to">
-		</div>
-		<div class="search--element">
-			<button id="search">Search</button>
-		</div>
+	</header>
+	<div class="content">
+		<p>
+			This is a <a href="#">test for the sake of test</a>.
+		</p>
+		<progress indeterminate></progress>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quos non minus quaerat facere nemo saepe quisquam ea nisi quis inventore earum veritatis praesentium a rem voluptatibus tenetur, nostrum aperiam!</p>
 	</div>
-</header>
-<div class="content">
-	<p>
-		This is a <a href="#">test for the sake of test</a>.
-	</p>
-	<progress indeterminate></progress>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quos non minus quaerat facere nemo saepe quisquam ea nisi quis inventore earum veritatis praesentium a rem voluptatibus tenetur, nostrum aperiam!</p>
-</div>
-<footer>
-	<p>Made by <a href="https://haroen.me">Haroen Viaene</a></p>
-</footer>
-<script src="src/main.js"></script>
+	<footer>
+		<p>Made by <a href="https://haroen.me">Haroen Viaene</a></p>
+	</footer>
+	<script src="src/main.js"></script>
 </body>
+
 </html>
