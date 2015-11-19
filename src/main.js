@@ -46,13 +46,28 @@
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		// todo: find out why this works
-		// var submit = search.getElementsByTagName('button');
+		var submit = search.getElementsByTagName('button')[0];
 		submit.addEventListener('click',function(){
-			notice('clicked');
+			notice('requested search');
 		});
 	};
 
 	calculate();
+
+	/**
+	 * logging your own
+	 * @return {[type]} [description]
+	 */
+	var log = function() {
+		var results = document.querySelector('.result');
+		var estimate = results.querySelector('.result--number');
+		var log = results.querySelector('.result--button');
+		log.addEventListener('click',function(){
+			notice('logged ' + estimate.innerHTML);
+		});
+	}
+
+	log();
 
 	/**
 	 * Show the graph
