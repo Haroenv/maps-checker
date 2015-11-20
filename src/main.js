@@ -131,7 +131,7 @@
 						fillColor: "rgba(0,0,0,0)",
 						strokeColor: "#000",
 						pointHighlightFill: "#000",
-					  data: getDataGoogleVaulues()
+					  data: getDataGoogleValues()
 				}]
 		}, {
 				bezierCurveTension: 0.3,
@@ -159,7 +159,7 @@
 				notice(est + ' is not a number');
 			} else {
 				var data = JSON.parse(window.localStorage.getItem('data')) || [];
-				data.push({time: Date.now(),value: est,google: google});
+				data.push({time: Date.now(),value: est,google: (google ? google : (data.length ? data[data.length-1].google : 0))});
 				window.localStorage.setItem('data',JSON.stringify(data));
 			}
 
