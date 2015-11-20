@@ -195,9 +195,12 @@
 	// cookie notice
 	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 
-	loadMaps();
-	calculate();
-	log();
-	initGraph();
+	window.onload = function() {
+		loadMaps();
+		calculate();
+		initGraph();
+		document.getElementById('submit').click();
+	}
+
 
 // })();
