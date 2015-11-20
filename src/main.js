@@ -51,7 +51,7 @@
 	 * Make the search results appear
 	 * todo: do the search
 	 */
-	var google;
+	var googleDistance;
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
@@ -60,8 +60,8 @@
 		var submit = search.getElementsByTagName('button')[0];
 		submit.addEventListener('click',function(){
 			//todo: search on google
-			google = 10;
-			document.querySelector('.result--number').value = google;
+			googleDistance = 10;
+			document.querySelector('.result--number').value = googleDistance;
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
@@ -69,6 +69,7 @@
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
 			notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
+			initGraph();
 		});
 	};
 
@@ -93,7 +94,7 @@
 	var getDataGoogleValues = function() {
 		var data = [];
 		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
-			data.push(e.google);
+			data.push(e.googleDistance);
 		});
 		return data;
 	}
@@ -116,6 +117,7 @@
 	 */
 	var graph;
 	var initGraph = function() {
+		graph ? graph.destroy() : null;
 		var ctx = document.getElementById("myChart").getContext("2d");
 		Chart.defaults.global.responsive = true;
 		graph = new Chart(ctx).Line({
@@ -159,14 +161,22 @@
 				notice(est + ' is not a number');
 			} else {
 				var data = JSON.parse(window.localStorage.getItem('data')) || [];
-				data.push({time: Date.now(),value: est,google: (google ? google : (data.length ? data[data.length-1].google : 0))});
+				data.push({time: Date.now(),value: est,google: (googleDistance ? googleDistance : (data.length ? data[data.length-1].google : 10))});
 				window.localStorage.setItem('data',JSON.stringify(data));
+				initGraph();
 			}
-
 		});
-		graph ? graph.update() : notice('The graph didn\'t load yet');
 	}
 
 	log();
+
+	var map;
+	function initMap() {
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: -34.397, lng: 150.644},
+	    zoom: 8
+	  });
+	}
+
 
 // })();
