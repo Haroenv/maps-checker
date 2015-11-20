@@ -4,8 +4,11 @@
  */
 
 // (function() {
-	//todo: remove in prod
-	console.log('Aight.');
+
+	//variables
+	var googleDistance;
+	var graph;
+	var map;
 
 	/**
 	 * add a notice, removeable by clicking the 'close button'
@@ -36,22 +39,16 @@
 		});
 	};
 
-	// cookie notice
-	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
-
 	var loadMaps = function() {
 		document.getElementById('from').value = window.localStorage.getItem('from');
 		document.getElementById('to').value = window.localStorage.getItem('to');
 		document.getElementById('mode').value = window.localStorage.getItem('mode');
 	}
 
-	loadMaps();
-
 	/**
 	 * Make the search results appear
 	 * todo: do the search
 	 */
-	var googleDistance;
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
@@ -61,19 +58,18 @@
 		submit.addEventListener('click',function(){
 			//todo: search on google
 			googleDistance = 10;
-			document.querySelector('.result--number').value = googleDistance;
+			document.querySelector('.result--number').innerHTML = googleDistance;
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
 			window.localStorage.setItem('from',from);
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
-			notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
+			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 			initGraph();
 		});
 	};
 
-	calculate();
 
 	/**
 	 * get the values the logs stored in localStorage
@@ -94,7 +90,7 @@
 	var getDataGoogleValues = function() {
 		var data = [];
 		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
-			data.push(e.googleDistance);
+			data.push(e.google);
 		});
 		return data;
 	}
@@ -115,7 +111,6 @@
 	/**
 	 * Show the graph
 	 */
-	var graph;
 	var initGraph = function() {
 		graph ? graph.destroy() : null;
 		var ctx = document.getElementById("myChart").getContext("2d");
@@ -146,8 +141,6 @@
 		});
 	}
 
-	initGraph();
-
 	/**
 	 * logging your own estimate
 	 */
@@ -168,15 +161,43 @@
 		});
 	}
 
-	log();
 
-	var map;
 	function initMap() {
-	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
-	    zoom: 8
+	  var directionsService = new google.maps.DirectionsService;
+	  var directionsDisplay = new google.maps.DirectionsRenderer;
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 7,
+	    center: {lat: 50.43, lng: 4.36}
+	  });
+	  directionsDisplay.setMap(map);
+
+	  var onChangeHandler = function() {
+	    calculateAndDisplayRoute(directionsService, directionsDisplay);
+	  };
+	  document.getElementById('submit').addEventListener('click', onChangeHandler)
+	}
+
+	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+	  directionsService.route({
+	    origin: window.localStorage.from,
+	    destination: window.localStorage.to,
+	    travelMode: window.localStorage.mode
+	  }, function(response, status) {
+	    if (status === google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    } else {
+	      window.alert('Directions request failed due to ' + status);
+	    }
 	  });
 	}
 
+
+	// cookie notice
+	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
+
+	loadMaps();
+	calculate();
+	log();
+	initGraph();
 
 // })();
