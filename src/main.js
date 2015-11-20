@@ -39,19 +39,29 @@
 	// cookie notice
 	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 
+	var loadMaps = function() {
+		document.getElementById('from').value = window.localStorage.getItem('from');
+		document.getElementById('to').value = window.localStorage.getItem('to');
+		document.getElementById('mode').value = window.localStorage.getItem('mode');
+	}
+
+	loadMaps();
+
 	/**
 	 * Make the search results appear
 	 * todo: do the search
 	 */
+	var google;
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
-		// todo: find out why this works
 		var submit = search.getElementsByTagName('button')[0];
 		submit.addEventListener('click',function(){
-			//todo: save to localstorage
+			//todo: search on google
+			google = 10;
+			document.querySelector('.result--number').value = google;
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
@@ -77,6 +87,18 @@
 	}
 
 	/**
+	 * get the values of Google maps the logs stored in localStorage
+	 * @return {array} the values
+	 */
+	var getDataGoogleValues = function() {
+		var data = [];
+		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
+			data.push(e.google);
+		});
+		return data;
+	}
+
+	/**
 	 * Get the times stored in localStorage
 	 * @return {array} the times a log occured
 	 */
@@ -94,31 +116,6 @@
 	 */
 	var graph;
 	var initGraph = function() {
-		var data = {
-				labels: getDataTimes(),
-				datasets: [{
-						label: "Your data",
-						fillColor: "#F44336",
-						strokeColor: "#F44336",
-						pointHighlightFill: "#F44336",
-						data: getDataValues()
-				}, {
-						label: "Google Maps",
-						fillColor: "rgba(0,0,0,0)",
-						strokeColor: "#000",
-						pointHighlightFill: "#000",
-					  data: [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
-				}]
-		};
-		var options = {
-				bezierCurveTension: 0.3,
-				pointDot: false,
-				datasetStroke: false,
-				datasetStrokeWidth: 0,
-				datasetFill: true,
-				tooltipTitleFontFamily: "-apple-system, system, sans-serif"
-
-		};
 		var ctx = document.getElementById("myChart").getContext("2d");
 		Chart.defaults.global.responsive = true;
 		graph = new Chart(ctx).Line({
@@ -134,7 +131,7 @@
 						fillColor: "rgba(0,0,0,0)",
 						strokeColor: "#000",
 						pointHighlightFill: "#000",
-					  data: [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+					  data: getDataGoogleVaulues()
 				}]
 		}, {
 				bezierCurveTension: 0.3,
@@ -162,13 +159,14 @@
 				notice(est + ' is not a number');
 			} else {
 				var data = JSON.parse(window.localStorage.getItem('data')) || [];
-				data.push({time: Date.now(),value: est});
+				data.push({time: Date.now(),value: est,google: google});
 				window.localStorage.setItem('data',JSON.stringify(data));
 			}
 
 		});
-		graph.update();
+		graph ? graph.update() : notice('The graph didn\'t load yet');
 	}
 
 	log();
+
 // })();
