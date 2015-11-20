@@ -165,7 +165,7 @@
 	function initMap() {
 	  var directionsService = new google.maps.DirectionsService;
 	  var directionsDisplay = new google.maps.DirectionsRenderer;
-	  var map = new google.maps.Map(document.getElementById('map'), {
+	  map = new google.maps.Map(document.getElementById('map'), {
 	    zoom: 7,
 	    center: {lat: 50.43, lng: 4.36}
 	  });
@@ -186,7 +186,7 @@
 	    if (status === google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
 	    } else {
-	      window.alert('Directions request failed due to ' + status);
+	      notice('Directions request failed due to ' + status);
 	    }
 	  });
 	}
@@ -198,6 +198,7 @@
 	window.onload = function() {
 		loadMaps();
 		calculate();
+		log();
 		initGraph();
 		document.getElementById('submit').click();
 	}
