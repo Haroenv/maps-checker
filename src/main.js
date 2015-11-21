@@ -78,12 +78,12 @@
 	  	window.localStorage.setItem('from',from);
 	  	window.localStorage.setItem('to',to);
 	  	window.localStorage.setItem('mode',mode);
-			//todo: search on google
-			var x = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
-			console.log(x);
-			googleTravelTime = 10;
-			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
-			initGraph();
+		//todo: search on google
+		var x = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
+		console.log(x);
+		googleTravelTime = 10;
+		// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
+		initGraph();
 		});
 	};
 
@@ -211,7 +211,10 @@
 
 
 	// cookie notice
-	notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
+	if (!window.localStorage.cookie)  {
+		window.localStorage.setItem('cookie',true);
+		notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
+	}
 
 	window.onload = function() {
 		loadSearchFromStorage();
