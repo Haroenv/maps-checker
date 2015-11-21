@@ -1,6 +1,7 @@
 /**
  * Scripts for maps checker.
  * @author Haroen Viaene <hello@haroen.me>
+ * @version 0.3
  */
 
 // (function() {
