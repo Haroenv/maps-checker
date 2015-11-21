@@ -6,7 +6,7 @@
 // (function() {
 
 	//variables
-	var googleDistance;
+	var googleTravelTime;
 	var graph;
 	var map;
 
@@ -14,6 +14,8 @@
 	 * add a notice, removeable by clicking the 'close button'
 	 * Creates <p class="notice"><span class="notice--close"></span>text</p>
 	 * @param  {string} text the notice text
+	 * @author Haroen Viaene <hello@haroen.me>
+	 * @license https://github.com/haroenv/notice CC-4.0-BY
 	 */
 	var notice = function(text){
 		var notice = document.createElement('p');
@@ -26,11 +28,7 @@
 		close.className += 'notice--close';
 		notice.className += 'notice';
 
-		// if ("webkitAppearance" in document.body.style) {
-		// 	close.style.webkitAppearance = "searchfield-cancel-button";
-		// } else {
 		close.appendChild(document.createTextNode('✕'));
-		// }
 
 		document.body.insertBefore(notice, document.body.firstChild);
 
@@ -47,6 +45,8 @@
 
 	/**
 	 * Make the search results appear
+	 * save to localstorage
+	 * display the travel time
 	 * todo: do the search
 	 */
 	var calculate = function() {
@@ -55,16 +55,32 @@
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
 		var submit = search.getElementsByTagName('button')[0];
+
+	  var directionsService = new google.maps.DirectionsService;
+	  var directionsDisplay = new google.maps.DirectionsRenderer;
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 7,
+	    center: {lat: 50.43, lng: 4.36}
+	  });
+	  directionsDisplay.setMap(map);
+
+	  // var onChangeHandler = function() {
+	  //   calculateAndDisplayRoute(directionsService, directionsDisplay);
+	  // };
+	  // document.getElementById('submit').addEventListener('click', onChangeHandler)
+
 		submit.addEventListener('click',function(){
-			//todo: search on google
-			googleDistance = 10;
-			document.querySelector('.result--number').innerHTML = googleDistance;
+			document.querySelector('.result--number').innerHTML = googleTravelTime;
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
 			window.localStorage.setItem('from',from);
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
+			//todo: search on google
+	    var x = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
+	    console.log(x);
+			googleTravelTime = 10;
 			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 			initGraph();
 		});
@@ -154,7 +170,7 @@
 				notice(est + ' is not a number');
 			} else {
 				var data = JSON.parse(window.localStorage.getItem('data')) || [];
-				data.push({time: Date.now(),value: est,google: (googleDistance ? googleDistance : (data.length ? data[data.length-1].google : 10))});
+				data.push({time: Date.now(),value: est,google: (googleTravelTime ? googleTravelTime : (data.length ? data[data.length-1].google : 10))});
 				window.localStorage.setItem('data',JSON.stringify(data));
 				initGraph();
 			}
@@ -162,29 +178,31 @@
 	}
 
 
-	function initMap() {
-	  var directionsService = new google.maps.DirectionsService;
-	  var directionsDisplay = new google.maps.DirectionsRenderer;
-	  map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 7,
-	    center: {lat: 50.43, lng: 4.36}
-	  });
-	  directionsDisplay.setMap(map);
+	// function initMap() {
+	//   var directionsService = new google.maps.DirectionsService;
+	//   var directionsDisplay = new google.maps.DirectionsRenderer;
+	//   map = new google.maps.Map(document.getElementById('map'), {
+	//     zoom: 7,
+	//     center: {lat: 50.43, lng: 4.36}
+	//   });
+	//   directionsDisplay.setMap(map);
 
-	  var onChangeHandler = function() {
-	    calculateAndDisplayRoute(directionsService, directionsDisplay);
-	  };
-	  document.getElementById('submit').addEventListener('click', onChangeHandler)
-	}
+	//   var onChangeHandler = function() {
+	//     calculateAndDisplayRoute(directionsService, directionsDisplay);
+	//   };
+	//   document.getElementById('submit').addEventListener('click', onChangeHandler)
+	// }
 
-	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+	var  calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode) {
 	  directionsService.route({
-	    origin: window.localStorage.from,
-	    destination: window.localStorage.to,
-	    travelMode: window.localStorage.mode
+	    origin: from,
+	    destination: to,
+	    travelMode: mode
 	  }, function(response, status) {
 	    if (status === google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
+	      console.log(response);
+	    	return response;
 	    } else {
 	      notice('Directions request failed due to ' + status);
 	    }
@@ -197,6 +215,7 @@
 
 	window.onload = function() {
 		loadMaps();
+		// initMap();
 		calculate();
 		log();
 		initGraph();
