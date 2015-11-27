@@ -211,6 +211,18 @@
 		});
 	}
 
+	/**
+	 * Save the graph
+	 * todo: namespacing and getById consistency
+	 */
+	var saveGraph = function() {
+		var graph = document.getElementById('myChart');
+		var img = graph.toDataURL("image/png");
+		document.getElementById('test').src = img;
+		var images = JSON.parse(window.localStorage.getItem('images')) || [];
+		images.push(img);
+		window.localStorage.setItem('images',JSON.stringify(images));
+	}
 
 	// cookie notice
 	if (!window.localStorage.cookie)  {
@@ -225,6 +237,7 @@
 		log();
 		initGraph();
 		document.getElementById('submit').click();
+		saveGraph();
 	}
 
 
