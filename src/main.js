@@ -178,22 +178,6 @@
 	 	});
 	 }
 
-
-	// function initMap() {
-	//   var directionsService = new google.maps.DirectionsService;
-	//   var directionsDisplay = new google.maps.DirectionsRenderer;
-	//   map = new google.maps.Map(document.getElementById('map'), {
-	//     zoom: 7,
-	//     center: {lat: 50.43, lng: 4.36}
-	//   });
-	//   directionsDisplay.setMap(map);
-
-	//   var onChangeHandler = function() {
-	//     calculateAndDisplayRoute(directionsService, directionsDisplay);
-	//   };
-	//   document.getElementById('submit').addEventListener('click', onChangeHandler)
-	// }
-
 	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode) {
 		directionsService.route({
 			origin: from,
