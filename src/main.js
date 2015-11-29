@@ -65,25 +65,25 @@
 		});
 		directionsDisplay.setMap(map);
 
-	 // var onChangeHandler = function() {
-	 //   calculateAndDisplayRoute(directionsService, directionsDisplay);
-	 // };
-	 // document.getElementById('submit').addEventListener('click', onChangeHandler)
+		// var onChangeHandler = function() {
+		//   calculateAndDisplayRoute(directionsService, directionsDisplay);
+		// };
+		// document.getElementById('submit').addEventListener('click', onChangeHandler)
 
-	 submit.addEventListener('click',function(){
-	 	document.querySelector('.result--number').innerHTML = googleTravelTime;
-	 	from = document.getElementById('from').value;
-	 	to = document.getElementById('to').value;
-	 	mode = document.getElementById('mode').value;
-	 	window.localStorage.setItem('from',from);
-	 	window.localStorage.setItem('to',to);
-	 	window.localStorage.setItem('mode',mode);
-		//todo: search on google
-		var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
-		console.log(expected);
-		googleTravelTime = expected;
-		// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
-		initGraph();
+		submit.addEventListener('click',function(){
+			document.querySelector('.result--number').innerHTML = googleTravelTime;
+			from = document.getElementById('from').value;
+			to = document.getElementById('to').value;
+			mode = document.getElementById('mode').value;
+			window.localStorage.setItem('from',from);
+			window.localStorage.setItem('to',to);
+			window.localStorage.setItem('mode',mode);
+			//todo: search on google
+			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
+			console.log(expected);
+			googleTravelTime = expected;
+			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
+			initGraph();
 		});
 	};
 
