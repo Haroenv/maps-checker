@@ -71,7 +71,6 @@
 		// document.getElementById('submit').addEventListener('click', onChangeHandler)
 
 		submit.addEventListener('click',function(){
-			document.querySelector('.result--number').innerHTML = googleTravelTime;
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
@@ -79,9 +78,15 @@
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
 			//todo: search on google
-			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode);
+			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode, function(expected) {
+				console.log(expected);
+				googleTravelTime = parseInt(expected / 60,10);
+				document.querySelector('.result--number').innerHTML = googleTravelTime;
+				initGraph();
+			});
 			console.log(expected);
 			googleTravelTime = expected;
+			document.querySelector('.result--number').innerHTML = googleTravelTime;
 			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 			initGraph();
 		});
@@ -178,7 +183,7 @@
 		});
 	}
 
-	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode) {
+	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode, callback) {
 		directionsService.route({
 			origin: from,
 			destination: to,
@@ -187,7 +192,7 @@
 			if (status === google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 				console.log(response.routes[0].legs[0].duration.value);
-				return response.routes[0].legs[0].duration.value; //todo: figure out what's wrong.
+				callback(response.routes[0].legs[0].duration.value);
 			} else {
 				notice('Directions request failed due to ' + status);
 			}
