@@ -79,15 +79,12 @@
 			window.localStorage.setItem('mode',mode);
 			//todo: search on google
 			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode, function(expected) {
-				console.log(expected);
 				googleTravelTime = parseInt(expected / 60,10);
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
 			});
-			console.log(expected);
 			googleTravelTime = expected;
 			document.querySelector('.result--number').innerHTML = googleTravelTime;
-			// notice('requested search from ' + from + ' to ' + to + ' by ' + mode);
 			initGraph();
 		});
 	};
@@ -159,7 +156,6 @@
 			datasetStrokeWidth: 0,
 			datasetFill: true,
 			tooltipTitleFontFamily: "-apple-system, system, sans-serif"
-
 		});
 	}
 
@@ -191,7 +187,6 @@
 		}, function(response, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
-				console.log(response.routes[0].legs[0].duration.value);
 				callback(response.routes[0].legs[0].duration.value);
 			} else {
 				notice('Directions request failed due to ' + status);
@@ -204,8 +199,7 @@
 	 * todo: namespacing and getById consistency
 	 */
 	var saveGraph = function() {
-		var graph = document.getElementById('myChart');
-		var img = graph.toDataURL("image/png");
+		var img = graph.toBase64Image();
 		document.getElementById('test').src = img;
 		var images = JSON.parse(window.localStorage.getItem('images')) || [];
 		images.push(img);
@@ -220,12 +214,16 @@
 
 	window.onload = function() {
 		loadSearchFromStorage();
-		// initMap();
 		calculate();
 		log();
 		initGraph();
 		document.getElementById('submit').click();
-		saveGraph();
+		document.querySelector('.extra--save').addEventListener('click',function(){
+			saveGraph();
+		});
+		document.querySelector('.extra--clear').addEventListener('click',function(){
+			window.localStorage.clear();
+		});
 	}
 
 
