@@ -64,11 +64,8 @@
 			center: {lat: 50.43, lng: 4.36}
 		});
 		directionsDisplay.setMap(map);
-
-		// var onChangeHandler = function() {
-		//   calculateAndDisplayRoute(directionsService, directionsDisplay);
-		// };
-		// document.getElementById('submit').addEventListener('click', onChangeHandler)
+		var trafficLayer = new google.maps.TrafficLayer();
+  	trafficLayer.setMap(map);
 
 		submit.addEventListener('click',function(){
 			from = document.getElementById('from').value;
@@ -77,8 +74,8 @@
 			window.localStorage.setItem('from',from);
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
-			//todo: search on google
 			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode, function(expected) {
+				// todo: make travic be integrated
 				googleTravelTime = parseInt(expected / 60,10);
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
@@ -223,6 +220,7 @@
 		});
 		document.querySelector('.extra--clear').addEventListener('click',function(){
 			window.localStorage.clear();
+			initGraph();
 		});
 	}
 
