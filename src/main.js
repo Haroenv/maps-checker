@@ -224,5 +224,12 @@
 		});
 	}
 
+	/* google analytics */
+	window.ga = window.ga || function() {
+	  (ga.q = ga.q||[]).push(arguments);
+	};
+	ga.l = +new Date;
+	ga("create", "UA-27277115-3", "auto");
+	ga("send", "pageview");
 
 // })();
