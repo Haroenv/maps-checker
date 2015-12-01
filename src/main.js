@@ -181,18 +181,13 @@
 		});
 	}
 
-	var cb = function(data) {
-		console.log(JSON.parse(data));
-	}
-
 	var durationInTraffic = function(from, to, mode, callback) {
 		var key = 'AIzaSyDb0bYTaEI04ai_OaxE-GK-2flcYJOc-Zc';
-		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now&callback=cb';
+		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
 			if (typeof callback === 'function') {
-				console.log(cb);
-				// callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
+				callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
 			}
 		});
 		req.open('GET',address);
