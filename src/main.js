@@ -13,7 +13,7 @@
 
 	/**
 	 * add a notice, removeable by clicking the 'close button'
-	 * Creates <p class="notice"><span class="notice--close"></span>text</p>
+	 * Creates <p class='notice'><span class='notice--close'></span>text</p>
 	 * @param  {string} text the notice text
 	 * @author Haroen Viaene <hello@haroen.me>
 	 * @license https://github.com/haroenv/notice CC-4.0-BY
@@ -74,15 +74,17 @@
 			window.localStorage.setItem('from',from);
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
-			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode, function(expected) {
-				// todo: make traffic be integrated
+			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
+				console.log('duration: ' + parseInt(expected / 60,10) + ' minutes');
+			// 	document.querySelector('.result--number').innerHTML = googleTravelTime;
+			// 	initGraph();
+			});
+			durationInTraffic(from, to, mode, function(expected){
 				googleTravelTime = parseInt(expected / 60,10);
+				console.log('duration_in_traffic: ' + parseInt(expected / 60,10) + ' minutes');
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
 			});
-			googleTravelTime = expected;
-			document.querySelector('.result--number').innerHTML = googleTravelTime;
-			initGraph();
 		});
 	};
 
@@ -129,21 +131,21 @@
 	 */
 	var initGraph = function() {
 		graph ? graph.destroy() : null;
-		var ctx = document.getElementById("myChart").getContext("2d");
+		var ctx = document.getElementById('myChart').getContext('2d');
 		Chart.defaults.global.responsive = true;
 		graph = new Chart(ctx).Line({
 			labels: getDataTimes(),
 			datasets: [{
-				label: "Your data",
-				fillColor: "#F44336",
-				strokeColor: "#F44336",
-				pointHighlightFill: "#F44336",
+				label: 'Your data',
+				fillColor: '#F44336',
+				strokeColor: '#F44336',
+				pointHighlightFill: '#F44336',
 				data: getDataValues()
 			}, {
-				label: "Google Maps",
-				fillColor: "rgba(0,0,0,0)",
-				strokeColor: "#000",
-				pointHighlightFill: "#000",
+				label: 'Google Maps',
+				fillColor: 'rgba(0,0,0,0)',
+				strokeColor: '#000',
+				pointHighlightFill: '#000',
 				data: getDataGoogleValues()
 			}]
 		}, {
@@ -152,7 +154,7 @@
 			datasetStroke: false,
 			datasetStrokeWidth: 0,
 			datasetFill: true,
-			tooltipTitleFontFamily: "-apple-system, system, sans-serif"
+			tooltipTitleFontFamily: '-apple-system, system, sans-serif'
 		});
 	}
 
@@ -176,6 +178,20 @@
 		});
 	}
 
+	var durationInTraffic = function(from, to, mode, callback) {
+		// todo: load from config.js
+		var key = ''// not in my git log!
+		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
+		var req = new XMLHttpRequest();
+		req.addEventListener('load', function(){
+			if (typeof callback === 'function') {
+				callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
+			}
+		});
+		req.open('GET',address);
+		req.send();
+	}
+
 	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode, callback) {
 		directionsService.route({
 			origin: from,
@@ -184,9 +200,9 @@
 		}, function(response, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
-				// if google maps for work would be free
-				//  callback(response.routes[0].legs[0].duration_in_traffic.value);
-				callback(response.routes[0].legs[0].duration.value);
+				if (typeof callback === 'function') {
+					callback(response.routes[0].legs[0].duration.value);
+				}
 			} else {
 				notice('Directions request failed due to ' + status);
 			}
@@ -231,7 +247,7 @@
 		(ga.q = ga.q||[]).push(arguments);
 	};
 	ga.l = +new Date;
-	ga("create", "UA-27277115-3", "auto");
-	ga("send", "pageview");
+	ga('create', 'UA-27277115-3', 'auto');
+	ga('send', 'pageview');
 
 // })();
