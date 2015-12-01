@@ -180,7 +180,7 @@
 
 	var durationInTraffic = function(from, to, mode, callback) {
 		// todo: load from config.js
-		var key = ''// not in my git log!
+		var key = 'AIzaSyCbnp-Kb6EybeLZMUGF2hzfnfRVIS2gkf4';
 		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
