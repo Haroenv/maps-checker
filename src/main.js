@@ -78,7 +78,7 @@
 				console.log('duration: ' + parseInt(expected / 60,10) + ' minutes');
 				if (document.querySelector('.result--number').innerHTML  === '') {
 					googleTravelTime = parseInt(expected / 60,10);
-					document.querySelector('.result--number').innerHTML = expected;
+					document.querySelector('.result--number').innerHTML = googleTravelTime;
 					initGraph();
 				}
 			});
