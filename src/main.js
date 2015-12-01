@@ -184,6 +184,8 @@
 		}, function(response, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
+				// if google maps for work would be free
+				//  callback(response.routes[0].legs[0].duration_in_traffic.value);
 				callback(response.routes[0].legs[0].duration.value);
 			} else {
 				notice('Directions request failed due to ' + status);
