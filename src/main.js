@@ -76,8 +76,10 @@
 			window.localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
 				console.log('duration: ' + parseInt(expected / 60,10) + ' minutes');
-			// 	document.querySelector('.result--number').innerHTML = googleTravelTime;
-			// 	initGraph();
+				if (document.querySelector('.result--number').innerHTML  === '') {
+					document.querySelector('.result--number').innerHTML = googleTravelTime;
+					initGraph();
+				}
 			});
 			durationInTraffic(from, to, mode, function(expected){
 				googleTravelTime = parseInt(expected / 60,10);
@@ -179,7 +181,7 @@
 	}
 
 	var durationInTraffic = function(from, to, mode, callback) {
-		// todo: load from config.js
+
 		var key = 'AIzaSyCbnp-Kb6EybeLZMUGF2hzfnfRVIS2gkf4';
 		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
 		var req = new XMLHttpRequest();
