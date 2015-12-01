@@ -75,7 +75,7 @@
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
 			var expected = calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode, function(expected) {
-				// todo: make travic be integrated
+				// todo: make traffic be integrated
 				googleTravelTime = parseInt(expected / 60,10);
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
