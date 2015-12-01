@@ -182,7 +182,7 @@
 	}
 
 	var durationInTraffic = function(from, to, mode, callback) {
-		var key = 'AIzaSyCbnp-Kb6EybeLZMUGF2hzfnfRVIS2gkf4';
+		var key = 'AIzaSyDb0bYTaEI04ai_OaxE-GK-2flcYJOc-Zc';
 		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
