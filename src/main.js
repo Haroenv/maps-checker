@@ -99,20 +99,20 @@
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
-				console.log('duration (directions): ' + parseInt(expected / 60,10) + ' minutes');
+				console.log('duration (directions/function): ' + parseInt(expected / 60,10) + ' minutes');
 				// googleTravelTime = parseInt(expected / 60,10);
 				// document.querySelector('.result--number').innerHTML = googleTravelTime;
 				// initGraph();
 			});
 			distancematrix(distanceService, from, to, mode,function(expected){
-				console.log('duration (distance): ' + parseInt(expected / 60,10) + ' minutes');
+				console.log('duration (distance/function): ' + parseInt(expected / 60,10) + ' minutes');
 				// googleTravelTime = parseInt(expected / 60,10);
 				// document.querySelector('.result--number').innerHTML = googleTravelTime;
 				// initGraph();
 			});
 			durationInTraffic(from, to, mode, function(expected){
 				googleTravelTime = parseInt(expected / 60,10);
-				console.log('duration_in_traffic (distance): ' + parseInt(expected / 60,10) + ' minutes');
+				console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
 			});
@@ -219,6 +219,7 @@
 		});
 		req.open('GET',address);
 		req.setRequestHeader('Access-Control-Allow-Origin','https://haroen.me');
+		req.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 		req.send();
 	}
 
@@ -243,7 +244,7 @@
 		distanceService.getDistanceMatrix({
 			origins: [from],
 			destinations: [to],
-			travelMode: google.maps.TravelMode.DRIVING,
+			travelMode: mode,
 			unitSystem: google.maps.UnitSystem.METRIC,
 			avoidHighways: false,
 			avoidTolls: false
