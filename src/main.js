@@ -1,8 +1,8 @@
 /**
- * Scripts for maps checker.
- * @author Haroen Viaene <hello@haroen.me>
- * @version 0.3
- */
+** Scripts for maps checker.
+** @author Haroen Viaene <hello@haroen.me>
+** @version 0.3
+**/
 
 // (function() {
 
@@ -12,30 +12,30 @@
 	var map;
 
 	/**
-	 * add a notice, removeable by clicking the 'close button'
-	 * Creates <p class='notice'><span class='notice--close'></span>text</p>
-	 * @param  {string} text the notice text
-	 * @author Haroen Viaene <hello@haroen.me>
-	 * @license https://github.com/haroenv/notice CC-4.0-BY
-	 * see also: style declaration:
-	 *
-	 * .notice {
-	 * 	font-size: .8em;
-	 * 	background-color: #9E9E9E;
-	 * 	padding: .2rem;
-	 * 	margin: 0;
-	 * 	flex: 0;
-	 * 	display: flex;
-	 * 	align-items: center;
-	 * }
-	 * .notice--close {
-	 * 	width: 1.25em;
-	 * 	height: 1.25rem;
-	 * 	margin: 0 .5em;
-	 * 	cursor: pointer;
-	 * 	user-select: none;
-	 * }
-	 */
+	** add a notice, removeable by clicking the 'close button'
+	** Creates <p class='notice'><span class='notice--close'></span>text</p>
+	** @param  {string} text the notice text
+	** @author Haroen Viaene <hello@haroen.me>
+	** @license https://github.com/haroenv/notice CC-4.0-BY
+	** see also: style declaration:
+	**
+	** .notice {
+	** 	font-size: .8em;
+	** 	background-color: #9E9E9E;
+	** 	padding: .2rem;
+	** 	margin: 0;
+	** 	flex: 0;
+	** 	display: flex;
+	** 	align-items: center;
+	** }
+	** .notice--close {
+	** 	width: 1.25em;
+	** 	height: 1.25rem;
+	** 	margin: 0 .5em;
+	** 	cursor: pointer;
+	** 	user-select: none;
+	** }
+	**/
 	var notice = function(text){
 		var notice = document.createElement('p');
 		var close = document.createElement('span');
@@ -63,11 +63,11 @@
 	}
 
 	/**
-	 * Make the search results appear
-	 * save to localstorage
-	 * display the travel time
-	 * todo: do the search
-	 */
+	** Make the search results appear
+	** save to localstorage
+	** display the travel time
+	** todo: do the search
+	**/
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
@@ -80,15 +80,16 @@
 			return;
 		}
 
-		var directionsService = new google.maps.DirectionsService;
-		var directionsDisplay = new google.maps.DirectionsRenderer;
+		var directionsService = new google.maps.DirectionsService();
+		var directionsDisplay = new google.maps.DirectionsRenderer();
+		var distanceService = new google.maps.DistanceMatrixService();
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
 			center: {lat: 50.43, lng: 4.36}
 		});
 		directionsDisplay.setMap(map);
 		var trafficLayer = new google.maps.TrafficLayer();
-  	trafficLayer.setMap(map);
+		trafficLayer.setMap(map);
 
 		submit.addEventListener('click',function(){
 			from = document.getElementById('from').value;
@@ -98,27 +99,30 @@
 			window.localStorage.setItem('to',to);
 			window.localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
-				console.log('duration: ' + parseInt(expected / 60,10) + ' minutes');
-				if (document.querySelector('.result--number').innerHTML  === '') {
-					googleTravelTime = parseInt(expected / 60,10);
-					document.querySelector('.result--number').innerHTML = googleTravelTime;
-					initGraph();
-				}
+				console.log('duration (directions): ' + parseInt(expected / 60,10) + ' minutes');
+				// googleTravelTime = parseInt(expected / 60,10);
+				// document.querySelector('.result--number').innerHTML = googleTravelTime;
+				// initGraph();
+			});
+			distancematrix(distanceService, from, to, mode,function(expected){
+				console.log('duration (distance): ' + parseInt(expected / 60,10) + ' minutes');
+				// googleTravelTime = parseInt(expected / 60,10);
+				// document.querySelector('.result--number').innerHTML = googleTravelTime;
+				// initGraph();
 			});
 			durationInTraffic(from, to, mode, function(expected){
 				googleTravelTime = parseInt(expected / 60,10);
-				console.log('duration_in_traffic: ' + parseInt(expected / 60,10) + ' minutes');
+				console.log('duration_in_traffic (distance): ' + parseInt(expected / 60,10) + ' minutes');
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
 			});
 		});
-	};
-
+		};
 
 	/**
-	 * get the values the logs stored in localStorage
-	 * @return {array} the values
-	 */
+	** get the values the logs stored in localStorage
+	** @return {array} the values
+	**/
 	var getDataValues = function() {
 		var data = [];
 		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -128,9 +132,9 @@
 	}
 
 	/**
-	 * get the values of Google maps the logs stored in localStorage
-	 * @return {array} the values
-	 */
+	** get the values of Google maps the logs stored in localStorage
+	** @return {array} the values
+	**/
 	var getDataGoogleValues = function() {
 		var data = [];
 		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -140,9 +144,9 @@
 	}
 
 	/**
-	 * Get the times stored in localStorage
-	 * @return {array} the times a log occured
-	 */
+	** Get the times stored in localStorage
+	** @return {array} the times a log occured
+	**/
 	var getDataTimes = function() {
 		var data = [];
 		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -153,8 +157,8 @@
 	}
 
 	/**
-	 * Show the graph
-	 */
+	** Show the graph
+	**/
 	var initGraph = function() {
 		graph ? graph.destroy() : null;
 		var ctx = document.getElementById('myChart').getContext('2d');
@@ -185,8 +189,8 @@
 	}
 
 	/**
-	 * logging your own estimate
-	 */
+	** logging your own estimate
+	**/
 	var log = function() {
 		var results = document.querySelector('.result');
 		var estimate = results.querySelector('.result--number');
@@ -235,10 +239,27 @@
 		});
 	}
 
+	var distancematrix = function(distanceService, from, to, mode, callback) {
+		distanceService.getDistanceMatrix({
+			origins: [from],
+			destinations: [to],
+			travelMode: google.maps.TravelMode.DRIVING,
+			unitSystem: google.maps.UnitSystem.METRIC,
+			avoidHighways: false,
+			avoidTolls: false
+		}, function(response, status) {
+			if (status !== google.maps.DistanceMatrixStatus.OK) {
+				notice('Error was: ' + status);
+			} else {
+				callback(response.rows[0].elements[0].duration.value);
+			}
+		});
+	}
+
 	/**
-	 * Save the graph
-	 * todo: namespacing and getById consistency
-	 */
+	** Save the graph
+	** todo: namespacing and getById consistency
+	**/
 	var saveGraph = function() {
 		var img = graph.toBase64Image();
 		document.getElementById('test').src = img;
@@ -268,7 +289,7 @@
 		});
 	}
 
-	/* google analytics */
+	/* google analytics**/
 	window.ga = window.ga || function() {
 		(ga.q = ga.q||[]).push(arguments);
 	};
@@ -276,7 +297,7 @@
 	ga('create', 'UA-27277115-3', 'auto');
 	ga('send', 'pageview');
 
-	/* listener on resize to reload graph */
+	/* listener on resize to reload graph**/
 	var resizeTimer;
 	window.addEventListener('resize', function(){
 		clearTimeout(resizeTimer);
