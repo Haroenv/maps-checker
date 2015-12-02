@@ -191,7 +191,7 @@
 			}
 		});
 		req.open('GET',address);
-		req.setRequestHeader('Access-Control-Allow-Origin',"https://haroen.me");
+		req.setRequestHeader('Access-Control-Allow-Origin','https://haroen.me');
 		req.send();
 	}
 
