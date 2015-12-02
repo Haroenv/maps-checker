@@ -74,7 +74,7 @@
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
 		var submit = search.getElementsByTagName('button')[0];
-		
+
 		if (typeof google === 'undefined') {
 			notice('Your internet connection is offline.');
 			return;
@@ -275,5 +275,14 @@
 	ga.l = +new Date;
 	ga('create', 'UA-27277115-3', 'auto');
 	ga('send', 'pageview');
+
+	/* listener on resize to reload graph */
+	var resizeTimer;
+	window.addEventListener('resize', function(){
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function() {
+			initGraph();
+		}, 250);
+	});
 
 // })();
