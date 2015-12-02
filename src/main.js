@@ -74,6 +74,11 @@
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
 		var submit = search.getElementsByTagName('button')[0];
+		
+		if (typeof google === 'undefined') {
+			notice('Your internet connection is offline.');
+			return;
+		}
 
 		var directionsService = new google.maps.DirectionsService;
 		var directionsDisplay = new google.maps.DirectionsRenderer;
