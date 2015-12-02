@@ -17,6 +17,24 @@
 	 * @param  {string} text the notice text
 	 * @author Haroen Viaene <hello@haroen.me>
 	 * @license https://github.com/haroenv/notice CC-4.0-BY
+	 * see also: style declaration:
+	 *
+	 * .notice {
+	 * 	font-size: .8em;
+	 * 	background-color: #9E9E9E;
+	 * 	padding: .2rem;
+	 * 	margin: 0;
+	 * 	flex: 0;
+	 * 	display: flex;
+	 * 	align-items: center;
+	 * }
+	 * .notice--close {
+	 * 	width: 1.25em;
+	 * 	height: 1.25rem;
+	 * 	margin: 0 .5em;
+	 * 	cursor: pointer;
+	 * 	user-select: none;
+	 * }
 	 */
 	var notice = function(text){
 		var notice = document.createElement('p');
