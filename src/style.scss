@@ -16,7 +16,7 @@ html {
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
@@ -27,16 +27,62 @@ body {
 }
 
 button {
-  user-select: none;
-  cursor: pointer;
+	background: $light;
+	border-radius: .2em;
+	color: $accent;
+	border: none;
+	text-decoration: none;
+	user-select: none;
+	box-shadow: 0 0 0 .1em $accent;
+
+	&:hover {
+		background: none;
+		box-shadow: 0 0 0 .1em $light;
+		color: $light;
+		background-color: $accent;
+		cursor: pointer;
+	}
+
+	&:active {
+		box-shadow: 0 0 0 2px $light;
+	}
 }
 
-input {
-	width: 100%;
+input,select {
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: $light;
+	border-radius: .2em;
+	color: $dark;
+	border: none;
+	text-decoration: none;
+	padding: .1em;
+	box-shadow: 0 0 0 .1em $accent;
 
-	&[type="search"] {
-		-moz-appearance: searchfield;
+	option {
+		-webkit-appearance: none;
 	}
+
+	&:hover {
+		background: none;
+		box-shadow: 0 0 0 .1em $light;
+		color: $light;
+		background-color: $accent;
+		cursor: pointer;
+	}
+
+	&:active {
+		box-shadow: 0 0 0 2px $light;
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+}
+
+button, input, select {
+	margin: .2em;
 }
 
 a {
