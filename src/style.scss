@@ -58,6 +58,7 @@ input,select,button {
 
 button {
 	color: $accent;
+	user-select: none;
 
 	&:hover {
 		color: $light;
