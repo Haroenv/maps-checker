@@ -63,6 +63,22 @@
 	}
 
 	/**
+	** make all search elemens enabled
+	** todo
+	**/
+	var enableSearch = function() {
+
+	}
+
+	/**
+	** make the search elements disabled
+	** todo
+	**/
+	var disableSearch = function() {
+
+	}
+
+	/**
 	** Make the search results appear
 	** save to localstorage
 	** display the travel time
@@ -103,21 +119,24 @@
 				// googleTravelTime = parseInt(expected / 60,10);
 				// document.querySelector('.result--number').innerHTML = googleTravelTime;
 				// initGraph();
+				// disableSearch();
 			});
 			distancematrix(distanceService, from, to, mode,function(expected){
 				console.log('duration (distance/function): ' + parseInt(expected / 60,10) + ' minutes');
 				// googleTravelTime = parseInt(expected / 60,10);
 				// document.querySelector('.result--number').innerHTML = googleTravelTime;
 				// initGraph();
+				// disableSearch();
 			});
 			durationInTraffic(from, to, mode, function(expected){
 				googleTravelTime = parseInt(expected / 60,10);
 				console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
 				document.querySelector('.result--number').innerHTML = googleTravelTime;
 				initGraph();
+				disableSearch();
 			});
 		});
-};
+	};
 
 	/**
 	** get the values the logs stored in localStorage
