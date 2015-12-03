@@ -57,25 +57,27 @@
 	};
 
 	var loadSearchFromStorage = function() {
-		document.getElementById('from').value = window.localStorage.getItem('from');
-		document.getElementById('to').value = window.localStorage.getItem('to');
-		document.getElementById('mode').value = window.localStorage.getItem('mode');
+		document.getElementById('from').value = localStorage.getItem('from');
+		document.getElementById('to').value = localStorage.getItem('to');
+		document.getElementById('mode').value = localStorage.getItem('mode');
 	}
 
 	/**
 	** make all search elemens enabled
-	** todo
 	**/
 	var enableSearch = function() {
-
+		document.getElementById('from').disabled = false;
+		document.getElementById('to').disabled = false;
+		document.getElementById('mode').disabled = false;
 	}
 
 	/**
 	** make the search elements disabled
-	** todo
 	**/
 	var disableSearch = function() {
-
+		document.getElementById('from').disabled = true;
+		document.getElementById('to').disabled = true;
+		document.getElementById('mode').disabled = true;
 	}
 
 	/**
@@ -89,7 +91,8 @@
 		var from = document.getElementById('from').value;
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
-		var submit = search.getElementsByTagName('button')[0];
+		var submit = document.getElementById('submit');
+		var edit = document.getElementById('edit');
 
 		if (typeof google === 'undefined') {
 			notice('Your internet connection is offline.');
@@ -111,9 +114,9 @@
 			from = document.getElementById('from').value;
 			to = document.getElementById('to').value;
 			mode = document.getElementById('mode').value;
-			window.localStorage.setItem('from',from);
-			window.localStorage.setItem('to',to);
-			window.localStorage.setItem('mode',mode);
+			localStorage.setItem('from',from);
+			localStorage.setItem('to',to);
+			localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
 				console.log('duration (directions/function): ' + parseInt(expected / 60,10) + ' minutes');
 				// googleTravelTime = parseInt(expected / 60,10);
@@ -136,7 +139,22 @@
 				disableSearch();
 			});
 		});
+
+		edit.addEventListener('click',function(){
+			if (confirm('Are you sure you want to edit the parameters?')) {
+				clearLogs();
+				initGraph();
+				enableSearch();
+			};
+		});
 	};
+
+	var clearLogs = function() {
+		localStorage.removeItem('data');
+		localStorage.removeItem('from');
+		localStorage.removeItem('to');
+		localStorage.removeItem('mode');
+	}
 
 	/**
 	** get the values the logs stored in localStorage
@@ -144,7 +162,7 @@
 	**/
 	var getDataValues = function() {
 		var data = [];
-		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
+		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
 			data.push(e.value);
 		});
 		return data;
@@ -156,7 +174,7 @@
 	**/
 	var getDataGoogleValues = function() {
 		var data = [];
-		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
+		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
 			data.push(e.google);
 		});
 		return data;
@@ -168,7 +186,7 @@
 	**/
 	var getDataTimes = function() {
 		var data = [];
-		(JSON.parse(window.localStorage.getItem('data')) || []).forEach(function(e,i){
+		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
 			var date = new Date(e.time);
 			data.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + date.getMinutes());
 		});
@@ -229,9 +247,9 @@
 			if (isNaN(est)) {
 				notice(est + ' is not a number');
 			} else {
-				var data = JSON.parse(window.localStorage.getItem('data')) || [];
-				data.push({time: Date.now(),value: est,google: (googleTravelTime ? googleTravelTime : (data.length ? data[data.length-1].google : 10))});
-				window.localStorage.setItem('data',JSON.stringify(data));
+				var data = JSON.parse(localStorage.getItem('data')) || [];
+				data.push({time: Date.now(),value: est,google: (googleTravelTime ? googleTravelTime : (data.length ? data[data.length-1].google : 0))});
+				localStorage.setItem('data',JSON.stringify(data));
 				initGraph();
 			}
 		});
@@ -302,14 +320,14 @@
 	var saveGraph = function() {
 		var img = graph.toBase64Image();
 		document.getElementById('test').src = img;
-		var images = JSON.parse(window.localStorage.getItem('images')) || [];
+		var images = JSON.parse(localStorage.getItem('images')) || [];
 		images.push(img);
-		window.localStorage.setItem('images',JSON.stringify(images));
+		localStorage.setItem('images',JSON.stringify(images));
 	}
 
 	// cookie notice
-	if (!window.localStorage.cookie)  {
-		window.localStorage.setItem('cookie',true);
+	if (!localStorage.cookie)  {
+		localStorage.setItem('cookie',true);
 		notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 	}
 
@@ -321,10 +339,6 @@
 		document.getElementById('submit').click();
 		document.querySelector('.extra--save').addEventListener('click',function(){
 			saveGraph();
-		});
-		document.querySelector('.extra--clear').addEventListener('click',function(){
-			window.localStorage.clear();
-			initGraph();
 		});
 	}
 
