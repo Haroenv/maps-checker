@@ -26,43 +26,18 @@ body {
 	min-height: 100vh;
 }
 
-button {
-	background: $light;
-	border-radius: .2em;
-	color: $accent;
+input,select,button {
 	border: none;
 	text-decoration: none;
-	user-select: none;
 	box-shadow: 0 0 0 .1em $accent;
-
-	&:hover {
-		background: none;
-		box-shadow: 0 0 0 .1em $light;
-		color: $light;
-		background-color: $accent;
-		cursor: pointer;
-	}
-
-	&:active {
-		box-shadow: 0 0 0 2px $light;
-	}
-}
-
-input,select {
+	margin: .2em;
+	padding: .2em;
+	border-radius: .2em;
+	font-size: 1em;
 	-webkit-appearance:none;
 	-moz-appearance: none;
-	appearance: none;
 	background-color: $light;
-	border-radius: .2em;
 	color: $dark;
-	border: none;
-	text-decoration: none;
-	padding: .1em;
-	box-shadow: 0 0 0 .1em $accent;
-
-	option {
-		-webkit-appearance: none;
-	}
 
 	&:hover {
 		background: none;
@@ -81,9 +56,12 @@ input,select {
 	}
 }
 
-button, input, select {
-	margin: .2em;
-	font-size: 1em;
+button {
+	color: $accent;
+
+	&:hover {
+		color: $light;
+	}
 }
 
 a {
