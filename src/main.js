@@ -117,7 +117,7 @@
 				initGraph();
 			});
 		});
-		};
+};
 
 	/**
 	** get the values the logs stored in localStorage
@@ -194,6 +194,12 @@
 	var log = function() {
 		var results = document.querySelector('.result');
 		var estimate = results.querySelector('.result--number');
+		estimate.addEventListener('keydown',function(e){
+			if (e.keyCode === 13) {
+				log.click();
+				e.preventDefault();
+			}
+		});
 		var log = results.querySelector('.result--button');
 		log.addEventListener('click',function(){
 			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
