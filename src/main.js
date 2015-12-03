@@ -194,6 +194,10 @@
 	var log = function() {
 		var results = document.querySelector('.result');
 		var estimate = results.querySelector('.result--number');
+
+		/**
+		** click on the "log" button when key is enter
+		**/
 		estimate.addEventListener('keydown',function(e){
 			if (e.keyCode === 13) {
 				log.click();
@@ -246,6 +250,15 @@
 		});
 	}
 
+	/**
+	** The google distance matrix api used client side
+	** used only to return the `duration_in_traffic`
+	** @param  {google.maps.DistanceMatrixService}   distanceService
+	** @param  {string}   from            the starting location
+	** @param  {string}   to              the ending location
+	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
+	** @param  {Function} callback        the function that returns only the `duration_in_traffic`
+	**/
 	var distancematrix = function(distanceService, from, to, mode, callback) {
 		distanceService.getDistanceMatrix({
 			origins: [from],
