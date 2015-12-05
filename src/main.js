@@ -6,9 +6,11 @@
 
 (function() {
 
-	//variables
+	/** The time that will be returned by google */
 	var googleTravelTime;
+	/** the graph */
 	var graph;
+	/** The map */
 	var map;
 
 	/**
@@ -293,7 +295,11 @@
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
 			if (typeof callback === 'function') {
-				callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
+				try {
+					callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
+				} catch (e) {
+					notice('Directions in traffic won\'t work on this system.');
+				}
 			}
 		});
 		req.open('POST',address);
