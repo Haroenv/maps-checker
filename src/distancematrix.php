@@ -1,9 +1,3 @@
 <?php
-$key = 'YOUR_API_CODE'; //fill in!
-$from = $_POST['from'];
-$to = $_POST['to'];
-$mode = $_POST['mode'];
-$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . urlencode($from) . '&destinations=' . urlencode($to) . '&key='. urlencode($key) .'&travelmode=' . urlencode($mode) . '&departure_time=now';
-$json = file_get_contents($url);
-echo $json;
+echo file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . urlencode($_POST['from']) . '&destinations=' . urlencode($_POST['to']) . '&key='. urlencode(json_decode(file_get_contents('config.json'), true)['maps-key']) .'&travelmode=' . urlencode($_POST['mode']) . '&departure_time=now');
 ?>
