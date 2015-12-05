@@ -14,9 +14,11 @@
 	/**
 	** add a notice, removeable by clicking the 'close button'
 	** Creates <p class='notice'><span class='notice--close'></span>text</p>
+	**
 	** @param  {string} text the notice text
 	** @author Haroen Viaene <hello@haroen.me>
 	** @license https://github.com/haroenv/notice CC-4.0-BY
+	**
 	** see also: style declaration:
 	**
 	** .notice {
@@ -56,6 +58,9 @@
 		});
 	};
 
+	/**
+	** Load to, from and mode from localStorage into their inputs
+	**/
 	var loadSearchFromStorage = function() {
 		document.getElementById('from').value = localStorage.getItem('from');
 		document.getElementById('to').value = localStorage.getItem('to');
@@ -130,6 +135,12 @@
 			});
 		});
 
+		/**
+		** if you click on 'edit', you'll:
+		** 1. delete the info
+		** 2. redraw the graph
+		** 3. make the inputs enabled again
+		**/
 		edit.addEventListener('click',function(){
 			if (confirm('Are you sure you want to edit the parameters?')) {
 				clearLogs();
@@ -139,6 +150,12 @@
 		});
 	};
 
+	/**
+	** Set the expected type to the result--number (in minutes)
+	** redraw the graph
+	** disable the search
+	** @param {int} expected the time in seconds
+	**/
 	var setExpected = function(expected) {
 		googleTravelTime = parseInt(expected / 60,10);
 		document.querySelector('.result--number').innerHTML = googleTravelTime;
@@ -146,6 +163,9 @@
 		disableSearch();
 	}
 
+	/**
+	** clear the logs of data, from, to and mode
+	**/
 	var clearLogs = function() {
 		localStorage.removeItem('data');
 		localStorage.removeItem('from');
@@ -225,7 +245,7 @@
 	/**
 	** logging your own estimate
 	**/
-	var log = function() {
+	var initLog = function() {
 		var results = document.querySelector('.result');
 		var estimate = results.querySelector('.result--number');
 
@@ -239,6 +259,10 @@
 			}
 		});
 		var log = results.querySelector('.result--button');
+
+		/**
+		** saving your own guess and google's guess with the unix timestamp as time
+		**/
 		log.addEventListener('click',function(){
 			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
 			if (isNaN(est)) {
@@ -322,10 +346,19 @@
 		notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 	}
 
+	/**
+	** Things to do on load
+	** 1. load the search from storage
+	** 2. initialise the search function
+	** 3. Initialise the logging function
+	** 4. Initialise the graph
+	** 5. add the event listener to the save button
+	** todo: finish the save button
+	**/
 	window.onload = function() {
 		loadSearchFromStorage();
 		calculate();
-		log();
+		initLog();
 		initGraph();
 		document.getElementById('submit').click();
 		document.querySelector('.extra--save').addEventListener('click',function(){
@@ -333,7 +366,9 @@
 		});
 	}
 
-	/* google analytics**/
+	/*
+	** google analytics
+	**/
 	window.ga = window.ga || function() {
 		(ga.q = ga.q||[]).push(arguments);
 	};
@@ -341,7 +376,10 @@
 	ga('create', 'UA-27277115-3', 'auto');
 	ga('send', 'pageview');
 
-	/* listener on resize to reload graph**/
+	/*
+	** listener on resize to reload graph
+	** Will refresh the graph if there is 250 ms after a resize event
+	**/
 	var resizeTimer;
 	window.addEventListener('resize', function(){
 		clearTimeout(resizeTimer);
