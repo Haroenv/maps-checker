@@ -12,32 +12,32 @@
 	var map;
 
 	/**
-	** add a notice, removeable by clicking the 'close button'
-	** Creates <p class='notice'><span class='notice--close'></span>text</p>
-	**
-	** @param  {string} text the notice text
-	** @author Haroen Viaene <hello@haroen.me>
-	** @license https://github.com/haroenv/notice CC-4.0-BY
-	**
-	** see also: style declaration:
-	**
-	** .notice {
-	** 	font-size: .8em;
-	** 	background-color: #9E9E9E;
-	** 	padding: .2rem;
-	** 	margin: 0;
-	** 	flex: 0;
-	** 	display: flex;
-	** 	align-items: center;
-	** }
-	** .notice--close {
-	** 	width: 1.25em;
-	** 	height: 1.25rem;
-	** 	margin: 0 .5em;
-	** 	cursor: pointer;
-	** 	user-select: none;
-	** }
-	**/
+	 * add a notice, removeable by clicking the 'close button'
+	 * Creates <p class='notice'><span class='notice--close'></span>text</p>
+	 *
+	 * @param  {string} text the notice text
+	 * @author Haroen Viaene <hello@haroen.me>
+	 * @license https://github.com/haroenv/notice CC-4.0-BY
+	 *
+	 * see also: style declaration:
+	 *
+	 * .notice {
+	 * 	font-size: .8em;
+	 * 	background-color: #9E9E9E;
+	 * 	padding: .2rem;
+	 * 	margin: 0;
+	 * 	flex: 0;
+	 * 	display: flex;
+	 * 	align-items: center;
+	 * }
+	 * .notice--close {
+	 * 	width: 1.25em;
+	 * 	height: 1.25rem;
+	 * 	margin: 0 .5em;
+	 * 	cursor: pointer;
+	 * 	user-select: none;
+	 * }
+	 */
 	var notice = function(text){
 		var notice = document.createElement('p');
 		var close = document.createElement('span');
@@ -59,8 +59,8 @@
 	};
 
 	/**
-	** Load to, from and mode from localStorage into their inputs
-	**/
+	 * Load to, from and mode from localStorage into their inputs
+	 */
 	var loadSearchFromStorage = function() {
 		document.getElementById('from').value = localStorage.getItem('from');
 		document.getElementById('to').value = localStorage.getItem('to');
@@ -68,8 +68,8 @@
 	}
 
 	/**
-	** make all search elemens enabled
-	**/
+	 * make all search elemens enabled
+	 */
 	var enableSearch = function() {
 		document.getElementById('from').disabled = false;
 		document.getElementById('to').disabled = false;
@@ -77,8 +77,8 @@
 	}
 
 	/**
-	** make the search elements disabled
-	**/
+	 * make the search elements disabled
+	 */
 	var disableSearch = function() {
 		document.getElementById('from').disabled = true;
 		document.getElementById('to').disabled = true;
@@ -86,11 +86,11 @@
 	}
 
 	/**
-	** Make the search results appear
-	** save to localstorage
-	** display the travel time
-	** todo: do the search
-	**/
+	 * Make the search results appear
+	 * save to localstorage
+	 * display the travel time
+	 * todo: do the search
+	 */
 	var calculate = function() {
 		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
@@ -136,11 +136,11 @@
 		});
 
 		/**
-		** if you click on 'edit', you'll:
-		** 1. delete the info
-		** 2. redraw the graph
-		** 3. make the inputs enabled again
-		**/
+		 * if you click on 'edit', you'll:
+		 * 1. delete the info
+		 * 2. redraw the graph
+		 * 3. make the inputs enabled again
+		 */
 		edit.addEventListener('click',function(){
 			if (confirm('Are you sure you want to edit the parameters?')) {
 				clearLogs();
@@ -151,11 +151,11 @@
 	};
 
 	/**
-	** Set the expected type to the result--number (in minutes)
-	** redraw the graph
-	** disable the search
-	** @param {int} expected the time in seconds
-	**/
+	 * Set the expected type to the result--number (in minutes)
+	 * redraw the graph
+	 * disable the search
+	 * @param {int} expected the time in seconds
+	 */
 	var setExpected = function(expected) {
 		googleTravelTime = parseInt(expected / 60,10);
 		document.querySelector('.result--number').innerHTML = googleTravelTime;
@@ -164,8 +164,8 @@
 	}
 
 	/**
-	** clear the logs of data, from, to and mode
-	**/
+	 * clear the logs of data, from, to and mode
+	 */
 	var clearLogs = function() {
 		localStorage.removeItem('data');
 		localStorage.removeItem('from');
@@ -174,9 +174,9 @@
 	}
 
 	/**
-	** get the values the logs stored in localStorage
-	** @return {array} the values
-	**/
+	 * get the values the logs stored in localStorage
+	 * @return {array} the values
+	 */
 	var getDataValues = function() {
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -186,9 +186,9 @@
 	}
 
 	/**
-	** get the values of Google maps the logs stored in localStorage
-	** @return {array} the values
-	**/
+	 * get the values of Google maps the logs stored in localStorage
+	 * @return {array} the values
+	 */
 	var getDataGoogleValues = function() {
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -198,9 +198,9 @@
 	}
 
 	/**
-	** Get the times stored in localStorage
-	** @return {array} the times a log occured
-	**/
+	 * Get the times stored in localStorage
+	 * @return {array} the times a log occured
+	 */
 	var getDataTimes = function() {
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
@@ -211,8 +211,8 @@
 	}
 
 	/**
-	** Show the graph
-	**/
+	 * Show the graph
+	 */
 	var initGraph = function() {
 		graph ? graph.destroy() : null;
 		var ctx = document.getElementById('graph').getContext('2d');
@@ -243,15 +243,15 @@
 	}
 
 	/**
-	** logging your own estimate
-	**/
+	 * logging your own estimate
+	 */
 	var initLog = function() {
 		var results = document.querySelector('.result');
 		var estimate = results.querySelector('.result--number');
 
 		/**
-		** click on the "log" button when key is enter
-		**/
+		 * click on the "log" button when key is enter
+		 */
 		estimate.addEventListener('keydown',function(e){
 			if (e.keyCode === 13) {
 				log.click();
@@ -261,8 +261,8 @@
 		var log = results.querySelector('.result--button');
 
 		/**
-		** saving your own guess and google's guess with the unix timestamp as time
-		**/
+		 * saving your own guess and google's guess with the unix timestamp as time
+		 */
 		log.addEventListener('click',function(){
 			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
 			if (isNaN(est)) {
@@ -277,16 +277,16 @@
 	}
 
 	/**
-	** The google distance matrix api used server side with a php mirror
-	** used only to return the `duration_in_traffic`
-	** BEWARE: google maps pretends to take the mode in account, but it doesn't, it always returns
-	** the directions for DRIVING
-	** @param  {google.maps.DistanceMatrixService}   distanceService
-	** @param  {string}   from            the starting location
-	** @param  {string}   to              the ending location
-	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
-	** @param  {Function} callback        the function that returns only the `duration_in_traffic`
-	**/
+	 * The google distance matrix api used server side with a php mirror
+	 * used only to return the `duration_in_traffic`
+	 * BEWARE: google maps pretends to take the mode in account, but it doesn't, it always returns
+	 * the directions for DRIVING
+	 * @param  {google.maps.DistanceMatrixService}   distanceService
+	 * @param  {string}   from            the starting location
+	 * @param  {string}   to              the ending location
+	 * @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
+	 * @param  {Function} callback        the function that returns only the `duration_in_traffic`
+	 */
 	var durationInTraffic = function(from, to, mode, callback) {
 		var params = 'from='+from+'&to='+to+'&mode='+mode;
 		var address = 'src/distancematrix.php';
@@ -302,15 +302,15 @@
 	}
 
 	/**
-	** The google directions service api
-	** used to return the `duration` and display the map
-	** @param  {google.maps.DirectionsService}   directionsService
-	** @param  {google.maps.DirectionsDisplay}   directionsDisplay
-	** @param  {string}   from            the starting location
-	** @param  {string}   to              the ending location
-	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
-	** @param  {Function} callback        the function that returns only the `duration`
-	**/
+	 * The google directions service api
+	 * used to return the `duration` and display the map
+	 * @param  {google.maps.DirectionsService}   directionsService
+	 * @param  {google.maps.DirectionsDisplay}   directionsDisplay
+	 * @param  {string}   from            the starting location
+	 * @param  {string}   to              the ending location
+	 * @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
+	 * @param  {Function} callback        the function that returns only the `duration`
+	 */
 	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode, callback) {
 		directionsService.route({
 			origin: from,
@@ -329,9 +329,9 @@
 	}
 
 	/**
-	** Save the graph
-	** todo: namespacing and getById consistency
-	**/
+	 * Save the graph
+	 * todo: namespacing and getById consistency
+	 */
 	var saveGraph = function() {
 		var img = graph.toBase64Image();
 		document.getElementById('test').src = img;
@@ -347,14 +347,14 @@
 	}
 
 	/**
-	** Things to do on load
-	** 1. load the search from storage
-	** 2. initialise the search function
-	** 3. Initialise the logging function
-	** 4. Initialise the graph
-	** 5. add the event listener to the save button
-	** todo: finish the save button
-	**/
+	 * Things to do on load
+	 * 1. load the search from storage
+	 * 2. initialise the search function
+	 * 3. Initialise the logging function
+	 * 4. Initialise the graph
+	 * 5. add the event listener to the save button
+	 * todo: finish the save button
+	 */
 	window.onload = function() {
 		loadSearchFromStorage();
 		calculate();
@@ -367,8 +367,8 @@
 	}
 
 	/*
-	** google analytics
-	**/
+	 * google analytics
+	 */
 	window.ga = window.ga || function() {
 		(ga.q = ga.q||[]).push(arguments);
 	};
@@ -377,9 +377,9 @@
 	ga('send', 'pageview');
 
 	/*
-	** listener on resize to reload graph
-	** Will refresh the graph if there is 250 ms after a resize event
-	**/
+	 * listener on resize to reload graph
+	 * Will refresh the graph if there is 250 ms after a resize event
+	 */
 	var resizeTimer;
 	window.addEventListener('resize', function(){
 		clearTimeout(resizeTimer);
