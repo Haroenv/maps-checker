@@ -2,9 +2,10 @@
 #sass after all
 ---
 
-$sans-serif: -apple-system, system, sans-serif;
+$sans-serif: -apple-system, 'Roboto', system, sans-serif;
 $accent: #F44336;
 $light: #EFEFEF;
+$medium: #AFAFAF;
 $dark: #263238;
 
 /* General styling */
@@ -52,6 +53,7 @@ input,select,button {
 	}
 
 	&:disabled {
+		color: $medium;
 		cursor: not-allowed;
 	}
 }

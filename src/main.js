@@ -119,24 +119,14 @@
 			localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
 				console.log('duration (directions/function): ' + parseInt(expected / 60,10) + ' minutes');
-				// googleTravelTime = parseInt(expected / 60,10);
-				// document.querySelector('.result--number').innerHTML = googleTravelTime;
-				// initGraph();
-				// disableSearch();
-			});
-			distancematrix(distanceService, from, to, mode,function(expected){
-				console.log('duration (distance/function): ' + parseInt(expected / 60,10) + ' minutes');
-				// googleTravelTime = parseInt(expected / 60,10);
-				// document.querySelector('.result--number').innerHTML = googleTravelTime;
-				// initGraph();
-				// disableSearch();
-			});
-			durationInTraffic(from, to, mode, function(expected){
-				googleTravelTime = parseInt(expected / 60,10);
-				console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
-				document.querySelector('.result--number').innerHTML = googleTravelTime;
-				initGraph();
-				disableSearch();
+				if (mode === 'DRIVING') {
+					durationInTraffic(from, to, mode, function(expected){
+						console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
+						setExpected(expected);
+					});
+				} else {
+					setExpected(expected);
+				}
 			});
 		});
 
@@ -148,6 +138,13 @@
 			};
 		});
 	};
+
+	var setExpected = function(expected) {
+		googleTravelTime = parseInt(expected / 60,10);
+		document.querySelector('.result--number').innerHTML = googleTravelTime;
+		initGraph();
+		disableSearch();
+	}
 
 	var clearLogs = function() {
 		localStorage.removeItem('data');
@@ -255,21 +252,41 @@
 		});
 	}
 
+	/**
+	** The google distance matrix api used server side with a php mirror
+	** used only to return the `duration_in_traffic`
+	** BEWARE: google maps pretends to take the mode in account, but it doesn't, it always returns
+	** the directions for DRIVING
+	** @param  {google.maps.DistanceMatrixService}   distanceService
+	** @param  {string}   from            the starting location
+	** @param  {string}   to              the ending location
+	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
+	** @param  {Function} callback        the function that returns only the `duration_in_traffic`
+	**/
 	var durationInTraffic = function(from, to, mode, callback) {
-		var key = 'AIzaSyDb0bYTaEI04ai_OaxE-GK-2flcYJOc-Zc';
-		var address = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + from + '&destinations=' + to + '&key='+ key +'&travelmode=' + mode + '&departure_time=now';
+		var params = 'from='+from+'&to='+to+'&mode='+mode;
+		var address = 'src/distancematrix.php';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
 			if (typeof callback === 'function') {
 				callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
 			}
 		});
-		req.open('GET',address);
-		req.setRequestHeader('Access-Control-Allow-Origin','https://haroen.me');
-		req.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With');
-		req.send();
+		req.open('POST',address);
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.send(params);
 	}
 
+	/**
+	** The google directions service api
+	** used to return the `duration` and display the map
+	** @param  {google.maps.DirectionsService}   directionsService
+	** @param  {google.maps.DirectionsDisplay}   directionsDisplay
+	** @param  {string}   from            the starting location
+	** @param  {string}   to              the ending location
+	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
+	** @param  {Function} callback        the function that returns only the `duration`
+	**/
 	var calculateAndDisplayRoute = function(directionsService, directionsDisplay, from, to, mode, callback) {
 		directionsService.route({
 			origin: from,
@@ -283,32 +300,6 @@
 				}
 			} else {
 				notice('Directions request failed due to ' + status);
-			}
-		});
-	}
-
-	/**
-	** The google distance matrix api used client side
-	** used only to return the `duration_in_traffic`
-	** @param  {google.maps.DistanceMatrixService}   distanceService
-	** @param  {string}   from            the starting location
-	** @param  {string}   to              the ending location
-	** @param  {string}   mode            the travel mode (DRIVING/TRANSIT/BICYCLING/WALKING)
-	** @param  {Function} callback        the function that returns only the `duration_in_traffic`
-	**/
-	var distancematrix = function(distanceService, from, to, mode, callback) {
-		distanceService.getDistanceMatrix({
-			origins: [from],
-			destinations: [to],
-			travelMode: mode,
-			unitSystem: google.maps.UnitSystem.METRIC,
-			avoidHighways: false,
-			avoidTolls: false
-		}, function(response, status) {
-			if (status !== google.maps.DistanceMatrixStatus.OK) {
-				notice('Error was: ' + status);
-			} else {
-				callback(response.rows[0].elements[0].duration.value);
 			}
 		});
 	}

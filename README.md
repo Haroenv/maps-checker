@@ -6,6 +6,11 @@ Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), thaught by Ro
 
 Live version at https://haroen.me/maps-checker
 
+# making it run
+
+1. you'll need a php host to host `distancematrix.php`
+2. you'll need to enter your API key there.
+
 # License
 
 [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
