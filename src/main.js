@@ -4,7 +4,7 @@
 ** @version 0.4
 **/
 
-// (function() {
+(function() {
 
 	//variables
 	var googleTravelTime;
@@ -388,4 +388,4 @@
 		}, 250);
 	});
 
-// })();
+})();
