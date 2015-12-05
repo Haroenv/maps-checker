@@ -9,7 +9,7 @@ Live version at https://haroen.me/maps-checker
 # making it run
 
 1. you'll need a php host to host `distancematrix.php`
-2. you'll need to enter your API key there.
+2. you'll need to enter your own direction matrix api key in `config.json`
 
 # License
 
