@@ -127,10 +127,15 @@
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
 				console.log('duration (directions/function): ' + parseInt(expected / 60,10) + ' minutes');
 				if (mode === 'DRIVING') {
-					durationInTraffic(from, to, mode, function(expected){
-						console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
+					try {
+						durationInTraffic(from, to, mode, function(expected){
+							console.log('duration_in_traffic (distance/XHR): ' + parseInt(expected / 60,10) + ' minutes');
+							setExpected(expected);
+						});
+					} catch (e) {
+						notice('Directions in traffic didn\'t work on this system.');
 						setExpected(expected);
-					});
+					}
 				} else {
 					setExpected(expected);
 				}
@@ -295,11 +300,7 @@
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
 			if (typeof callback === 'function') {
-				try {
-					callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
-				} catch (e) {
-					notice('Directions in traffic won\'t work on this system.');
-				}
+				callback(JSON.parse(this.responseText).rows[0].elements[0].duration_in_traffic.value);
 			}
 		});
 		req.open('POST',address);
