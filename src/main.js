@@ -126,6 +126,11 @@
 			localStorage.setItem('mode',mode);
 			calculateAndDisplayRoute(directionsService, directionsDisplay, from, to, mode,function(expected){
 				console.log('duration (directions/function): ' + parseInt(expected / 60,10) + ' minutes');
+
+				/**
+				 * only if the the mode is driving, it's worthwile to send a diferent request
+				 * In all other cases you can use the distance returend by calculateAndDisplayRoute
+				 */
 				if (mode === 'DRIVING') {
 					durationInTraffic(from, to, mode, function(exp){
 						console.log('duration_in_traffic (distance/XHR): ' + parseInt(exp / 60,10) + ' minutes');
@@ -257,7 +262,7 @@
 		var estimate = results.querySelector('.result--number');
 
 		/**
-		 * click on the "log" button when key is enter
+		 * click on the 'log' button when key is enter
 		 */
 		estimate.addEventListener('keydown',function(e){
 			if (e.keyCode === 13) {
@@ -295,7 +300,8 @@
 	 * @param  {Function} callback        the function that returns only the `duration_in_traffic`
 	 */
 	var durationInTraffic = function(from, to, mode, callback) {
-		var params = 'from='+from+'&to='+to+'&mode='+mode;
+		var params = 'from='+from+'&to='+to+'&mode='+mode.toLowerCase();
+		console.log(mode.toLowerCase());
 		var address = 'src/distancematrix.php';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
@@ -308,7 +314,7 @@
 			}
 		});
 		req.open('POST',address);
-		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		req.send(params);
 	}
 
