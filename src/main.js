@@ -130,10 +130,10 @@
 					durationInTraffic(from, to, mode, function(exp){
 						console.log('duration_in_traffic (distance/XHR): ' + parseInt(exp / 60,10) + ' minutes');
 						if (exp) {
-							setExpected(exp);	
+							setExpected(exp);
 						} else {
 							notice('Directions in traffic didn\'t work on this system.');
-							setExpected(expected);					
+							setExpected(expected);
 						}
 					});
 				} else {
