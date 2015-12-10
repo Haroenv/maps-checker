@@ -22,7 +22,11 @@ html {
 
 body {
 	margin: 0;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	min-height: 100vh;
 }
@@ -60,6 +64,9 @@ input,select,button {
 
 button {
 	color: $accent;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 
 	&:hover {
@@ -78,8 +85,14 @@ a {
 /* header */
 header {
 	background-color: $accent;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	color: $light;
 }
@@ -95,7 +108,11 @@ h1 {
 
 /* search bar */
 .search {
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	@media all and (min-width: 56rem) {
 		margin: 0 auto;
@@ -103,8 +120,14 @@ h1 {
 	max-width: 56rem;
 
 	&--element {
+		display: -webkit-flex;
+		display: -ms-flexbox;
 		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
 		flex-direction: column;
+		-webkit-justify-content: flex-end;
+		-ms-flex-pack: end;
 		justify-content: flex-end;
 		margin: .2em;
 		width: percentage(1/4);
@@ -118,8 +141,14 @@ h1 {
 	background-color: #9E9E9E;
 	padding: .2rem;
 	margin: 0;
+	-webkit-flex: 0;
+	-ms-flex: 0;
 	flex: 0;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
 	align-items: center;
 
 	&--close {
@@ -127,6 +156,9 @@ h1 {
 		height: 1.25rem;
 		margin: 0 .5em;
 		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
 		user-select: none;
 	}
 }
@@ -136,13 +168,21 @@ h1 {
 
 .content {
 	margin: 1em;
+	-webkit-flex: 1;
+	-ms-flex: 1;
 	flex: 1;
 }
 
 /* result window */
 .result {
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 
 	&> * {
@@ -168,9 +208,17 @@ h1 {
 
 /* result window */
 .extra {
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
 	flex-direction: column;
 
 	&> * {
