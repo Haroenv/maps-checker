@@ -248,13 +248,13 @@ h1 {
 
 /* fix to make the cursor look better in gmaps */
 .gm-style > div {
+	cursor: move !important;
   cursor: -webkit-grab !important;
-  cursor: -moz-grab !important;
   cursor: grab !important;
 
 	&:active {
+		cursor: move !important;
 		cursor: -webkit-grabbing !important;
-		cursor: -moz-grabbing !important;
 		cursor: grabbing !important;
 	}
 }
