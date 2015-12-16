@@ -397,8 +397,18 @@
 	 * todo: namespacing and getById consistency
 	 */
 	var saveGraph = function() {
-		var img = graph.toBase64Image();
-		document.getElementById('test').src = img;
+		var extra = document.querySelector('.extra');
+		var img = document.createElement('img');
+		var container = document.createElement('div');
+		container.className += 'extra--container';
+		img.className += 'extra--image';
+		var src = graph.toBase64Image();
+		img.src = src;
+		container.appendChild(img);
+		extra.appendChild(container);
+
+		/* add the saved images by the user to localstorage */
+		/* todo: read this from localstorage too */
 		var images = JSON.parse(localStorage.getItem('images')) || [];
 		images.push(img);
 		localStorage.setItem('images',JSON.stringify(images));

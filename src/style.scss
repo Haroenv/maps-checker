@@ -278,9 +278,21 @@ h1 {
 		margin: .2em;
 	}
 
-	&--image {
-		height: 6em;
-		width: auto;
+	&--container {
+		height: 14em;
+		width: calc(90vw - 0.4em);
+		overflow-x: scroll;
+		overflow-y: hidden;
+		// display: -webkit-flex;
+		// display: -ms-flexbox;
+		// display: flex;
+		// -webkit-justify-content: center;
+		// -ms-flex-pack: center;
+		// justify-content: center;
+
+		img {
+			height: 100%;
+		}
 	}
 }
 
