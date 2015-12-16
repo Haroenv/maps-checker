@@ -249,10 +249,12 @@ h1 {
 /* fix to make the cursor look better in gmaps */
 .gm-style > div {
   cursor: -webkit-grab !important;
+  cursor: -moz-grab !important;
   cursor: grab !important;
 
 	&:active {
 		cursor: -webkit-grabbing !important;
+		cursor: -moz-grabbing !important;
 		cursor: grabbing !important;
 	}
 }
