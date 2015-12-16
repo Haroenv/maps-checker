@@ -95,8 +95,6 @@
 
 		cancel.focus();
 
-		console.log(modal.querySelector('.modal--okay'));
-
 		modal.querySelector('.modal--okay').addEventListener('click',function(){
 			document.body.removeChild(modal);
 			agreeCallback();
@@ -267,7 +265,7 @@
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
 			var date = new Date(e.time);
-			data.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + date.getMinutes());
+			data.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()));
 		});
 		return data;
 	}
