@@ -349,7 +349,6 @@
 	 */
 	var durationInTraffic = function(from, to, mode, callback) {
 		var params = 'from='+from+'&to='+to+'&mode='+mode.toLowerCase();
-		console.log(mode.toLowerCase());
 		var address = 'src/distancematrix.php';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
