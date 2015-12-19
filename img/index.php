@@ -29,12 +29,6 @@ foreach ($di as $file) {
   <meta name="theme-color" content="#F44336">
   <link rel="stylesheet" href="../src/style.css" />
   <link rel="icon" type="image/png" href="../favicon.png" />
-  <style>
-  img {
-    height: 14rem;
-    max-width: 100%;
-  }
-  </style>
 </head>
 
 <body>
@@ -46,7 +40,7 @@ foreach ($di as $file) {
     <p>Beware: this can be slow to load if there are a lot of images</p>
     <?php
     foreach ($images as $img) {
-       echo '<img src="' .  $img . '"></img>' . PHP_EOL;
+       echo '<div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
      } ?>
   </div>
   <footer>
