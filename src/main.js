@@ -414,7 +414,7 @@
 		// });
 		// req.open('GET',address);
 		// req.send();
-		//
+		console.log(src);
 		var params = 'name=' + new Date().getTime() + '.png&data=' + src;
 		var address = 'src/saveimage.php';
 		var req = new XMLHttpRequest();
