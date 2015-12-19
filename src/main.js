@@ -419,7 +419,7 @@
 		var address = 'src/saveimage.php';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
-			console.log(req.responseText);
+			notice('Chart was saved as an image');
 		});
 		req.open('POST',address);
 		req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
