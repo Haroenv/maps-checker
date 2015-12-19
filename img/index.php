@@ -29,6 +29,11 @@ foreach ($di as $file) {
   <meta name="theme-color" content="#F44336">
   <link rel="stylesheet" href="../src/style.css" />
   <link rel="icon" type="image/png" href="../favicon.png" />
+  <style>
+  img {
+    width: 100vw;
+  }
+  </style>
 </head>
 
 <body>
