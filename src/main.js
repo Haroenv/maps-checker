@@ -393,8 +393,7 @@
 	}
 
 	/**
-	 * Save the graph
-	 * todo: namespacing and getById consistency
+	 * Save the graph and display it
 	 */
 	var saveGraph = function() {
 		var extra = document.querySelector('.extra');
@@ -407,11 +406,30 @@
 		container.appendChild(img);
 		extra.appendChild(container);
 
+		/* save the image to a /img/timestamp.png */
+		// var address = 'src/saveimage.php?name=' + new Date().getTime() + '.png&data=' + src;
+		// var req = new XMLHttpRequest();
+		// req.addEventListener('load', function(){
+		// 	console.log('okay, load happened');
+		// });
+		// req.open('GET',address);
+		// req.send();
+		//
+		var params = 'name=' + new Date().getTime() + '.png&data=' + src;
+		var address = 'src/saveimage.php';
+		var req = new XMLHttpRequest();
+		req.addEventListener('load', function(){
+			console.log('done request');
+		});
+		req.open('POST',address);
+		req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		req.send(params);
+
 		/* add the saved images by the user to localstorage */
 		/* todo: read this from localstorage too */
-		var images = JSON.parse(localStorage.getItem('images')) || [];
-		images.push(img);
-		localStorage.setItem('images',JSON.stringify(images));
+		// var images = JSON.parse(localStorage.getItem('images')) || [];
+		// images.push(img);
+		// localStorage.setItem('images',JSON.stringify(images));
 	}
 
 	// cookie notice

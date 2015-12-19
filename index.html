@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--
-	Maps Checker is a checker for google maps travel time
+	Maps Checker is a checker for Google Maps travel time
 	compared to actual time.
+	Home page.
 	@author Haroen Viaene <hello@haroen.me>
 -->
 <html lang="en">
@@ -13,7 +14,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
-	<link rel="icon" href="/apple-touch-icon.png" />
+	<link rel="icon" href="apple-touch-icon.png" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="theme-color" content="#F44336">
 	<link rel="stylesheet" href="src/style.css" />
@@ -50,17 +51,18 @@
 	</header>
 	<div class="content">
 		<div class="result">
-			<p class="result--title">estimate:</p>
-			<p class="result--number" contenteditable></p>
-			<p class="result--unit">minutes</p>
+			<span class="result--title">estimate:</span>
+			<span class="result--number" contenteditable></span>
+			<span class="result--unit">minutes</span>
 			<button class="result--button">log your time</button>
 		</div>
 		<p>How accurate is Google Maps actually? Find out for yourself here! Search for an itinerary, and write down how much time you actually did on it. You can then compare that to Google's estimate.</p>
 		<canvas class="graph" id="graph"></canvas>
 		<div id="map"></div>
-	</div>
-	<div class="extra">
-		<button class="extra--save">Save as image</button>
+		<div class="extra">
+			<button class="extra--save">Save as image</button>
+			<p>Watch the saved images on <a href="img">/img</a></p>
+		</div>
 	</div>
 	<footer>
 		<p>Made by <a href="https://haroen.me">Haroen Viaene</a> | code on <a href="https://github.com/haroenv/maps-checker">GitHub</a></p>
