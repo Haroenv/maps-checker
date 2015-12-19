@@ -4,7 +4,9 @@ A comparison between google maps travel time and actual travel time.
 
 Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), thaught by Rogier van der Linde
 
-Live version at https://haroen.me/maps-checker (at this point it doesn't return the `distance_in_traffic`, because the php doesn't run.)
+Live version at http://haroenviaene.ikdoeict.be/maps
+
+There's also a github pages version that won't run all the php things at https://haroen.me/maps-checker (which is needed for `distance_in_traffic` and saving images).
 
 # making it run
 
