@@ -31,7 +31,7 @@ foreach ($di as $file) {
   <link rel="icon" type="image/png" href="../favicon.png" />
   <style>
   img {
-    width: 100vw;
+    width: 100%;
   }
   </style>
 </head>
