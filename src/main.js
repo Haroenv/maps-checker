@@ -407,14 +407,6 @@
 		extra.appendChild(container);
 
 		/* save the image to a /img/timestamp.png */
-		// var address = 'src/saveimage.php?name=' + new Date().getTime() + '.png&data=' + src;
-		// var req = new XMLHttpRequest();
-		// req.addEventListener('load', function(){
-		// 	console.log('okay, load happened');
-		// });
-		// req.open('GET',address);
-		// req.send();
-		console.log(src);
 		var params = 'name=' + new Date().getTime() + '.png&data=' + src;
 		var address = 'src/saveimage.php';
 		var req = new XMLHttpRequest();
@@ -426,10 +418,10 @@
 		req.send(params);
 
 		/* add the saved images by the user to localstorage */
-		/* todo: read this from localstorage too */
-		// var images = JSON.parse(localStorage.getItem('images')) || [];
-		// images.push(img);
-		// localStorage.setItem('images',JSON.stringify(images));
+		/* possibly this can be read from localstorage */
+		var images = JSON.parse(localStorage.getItem('images')) || [];
+		images.push(img);
+		localStorage.setItem('images',JSON.stringify(images));
 	}
 
 	// cookie notice
