@@ -137,42 +137,42 @@ h1 {
 
 /* modal */
 .modal {
-    background-color: #9E9E9E;
-    padding: 1em;
-    border-radius: .2em;
-    width: 80vw;
-    position: absolute;
-    left: 10vw;
-    top: 40vh;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -moz-flex-direction: column;
-    -ms-flex-direction: column;
-    -o-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    box-shadow: 0 0 .5em black;
+	background-color: #9E9E9E;
+	padding: 1em;
+	border-radius: .2em;
+	width: 80vw;
+	position: absolute;
+	left: 10vw;
+	top: 40vh;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	box-shadow: 0 0 .5em black;
 }
 
 @media all and (min-width: 40rem) {
-    .modal {
-        width: 40vw;
-        left: 30vw;
-    }
+	.modal {
+		width: 40vw;
+		left: 30vw;
+	}
 }
 
 .modal button {
-    margin: 0 .5em;
-    cursor: pointer;
+	margin: 0 .5em;
+	cursor: pointer;
 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* notice */
@@ -182,9 +182,15 @@ h1 {
 	background-color: #9E9E9E;
 	padding: .2rem;
 	margin: 0;
-	-webkit-flex: 0 0 auto;
-	-ms-flex: 0 0 auto;
-	flex: 0 0 auto;
+	-webkit-flex-grow: 0;
+	-ms-flex-positive: 0;
+	flex-grow: 0;
+	-webkit-flex-shrink: 0;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	-webkit-flex-basis: auto;
+	-ms-flex-preferred-size: auto;
+	flex-basis: auto;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
@@ -209,9 +215,15 @@ h1 {
 
 .content {
 	margin: 1em;
-	-webkit-flex: 1 0 auto;
-	-ms-flex: 1 0 auto;
-	flex: 1 0 auto;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	-webkit-flex-shrink: 0;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	-webkit-flex-basis: auto;
+	-ms-flex-preferred-size: auto;
+	flex-basis: auto;
 
 	p {
 		@media all and (min-width: 56rem) {
@@ -258,8 +270,8 @@ h1 {
 /* fix to make the cursor look better in gmaps */
 .gm-style > div {
 	cursor: move !important;
-  cursor: -webkit-grab !important;
-  cursor: grab !important;
+	cursor: -webkit-grab !important;
+	cursor: grab !important;
 
 	&:active {
 		cursor: move !important;
