@@ -298,6 +298,7 @@
 			datasetStroke: false,
 			datasetStrokeWidth: 0,
 			datasetFill: true,
+			multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
 			tooltipTitleFontFamily: '-apple-system, system, sans-serif'
 		});
 	}
