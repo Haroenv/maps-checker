@@ -324,7 +324,7 @@
 		 * saving your own guess and google's guess with the unix timestamp as time
 		 */
 		log.addEventListener('click',function(){
-			var est = estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.');
+			var est = parseFloat(estimate.innerHTML.replace(/\s+/g, '').replace(/,/g,'.'));
 			if (isNaN(est)) {
 				notice(est + ' is not a number');
 			} else {
@@ -425,7 +425,7 @@
 	}
 
 	// cookie notice
-	if (!localStorage.cookie)  {
+	if (!localStorage.getItem('cookie'))  {
 		localStorage.setItem('cookie',true);
 		notice('This site uses cookies to function. By continuing to use this site you agree to save local cookies. ');
 	}
@@ -443,8 +443,10 @@
 		loadSearchFromStorage();
 		calculate();
 		initLog();
+		if (localStorage.getItem('to') && localStorage.getItem('from') && localStorage.getItem('mode')) {
+			document.getElementById('submit').click();
+		};
 		initGraph();
-		document.getElementById('submit').click();
 		document.querySelector('.extra--save').addEventListener('click',function(){
 			saveGraph();
 		});
