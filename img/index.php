@@ -8,6 +8,7 @@ foreach ($di as $file) {
     }
   }
 }
+sort($images);
 ?><!DOCTYPE html>
 <!--
   Maps Checker is a checker for Google Maps travel time
