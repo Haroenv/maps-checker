@@ -1,0 +1,6 @@
+{
+  "name": "Maps Checker",
+  "version": "0.1.0",
+  "description": "A way to check accuracy of google Maps",
+  "repository": "https://github.com/haroenv/maps-checker"
+}
