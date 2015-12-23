@@ -2,7 +2,7 @@
 
 A comparison between google maps travel time and actual travel time.
 
-Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), thaught by Rogier van der Linde
+Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), taught by Rogier van der Linde
 
 Live version at http://haroenviaene.ikdoeict.be/maps and https://maps-checker.herokuapp.com
 
