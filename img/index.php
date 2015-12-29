@@ -41,11 +41,10 @@ rsort($images);
     <p>Here you can see all the images that have been saved to this point.</p>
     <p>Beware: this can be slow to load if there are a lot of images</p>
     <div class="extra">
-    <div class="extra--container"><img src="1450814573587.png"></img></div>
-      <?php
-    foreach ($images as $img) {
-       echo '<div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
-     } ?>
+<?php
+foreach ($images as $img) {
+  echo '      <div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
+} ?>
     </div>
   </div>
   <footer>
