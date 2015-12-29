@@ -114,7 +114,7 @@
 		document.getElementById('from').value = localStorage.getItem('from');
 		document.getElementById('to').value = localStorage.getItem('to');
 		document.getElementById('mode').value = localStorage.getItem('mode');
-	}
+	};
 
 	/**
 	 * make all search elemens enabled
@@ -123,7 +123,7 @@
 		document.getElementById('from').disabled = false;
 		document.getElementById('to').disabled = false;
 		document.getElementById('mode').disabled = false;
-	}
+	};
 
 	/**
 	 * make the search elements disabled
@@ -132,7 +132,7 @@
 		document.getElementById('from').disabled = true;
 		document.getElementById('to').disabled = true;
 		document.getElementById('mode').disabled = true;
-	}
+	};
 
 	/**
 	 * Make the search results appear
@@ -141,7 +141,6 @@
 	 * todo: do the search
 	 */
 	var calculate = function() {
-		var search = document.querySelector('.search');
 		var from = document.getElementById('from').value;
 		var to = document.getElementById('to').value;
 		var mode = document.getElementById('mode').value;
@@ -155,7 +154,6 @@
 
 		var directionsService = new google.maps.DirectionsService();
 		var directionsDisplay = new google.maps.DirectionsRenderer();
-		var distanceService = new google.maps.DistanceMatrixService();
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
 			center: {lat: 50.43, lng: 4.36}
@@ -221,7 +219,7 @@
 		document.querySelector('.result--number').innerHTML = googleTravelTime;
 		initGraph();
 		disableSearch();
-	}
+  };
 
 	/**
 	 * clear the logs of data, from, to and mode
@@ -231,7 +229,7 @@
 		localStorage.removeItem('from');
 		localStorage.removeItem('to');
 		localStorage.removeItem('mode');
-	}
+	};
 
 	/**
 	 * get the values the logs stored in localStorage
@@ -243,7 +241,7 @@
 			data.push(e.value);
 		});
 		return data;
-	}
+	};
 
 	/**
 	 * get the values of Google maps the logs stored in localStorage
@@ -255,7 +253,7 @@
 			data.push(e.google);
 		});
 		return data;
-	}
+	};
 
 	/**
 	 * Get the times stored in localStorage
@@ -268,13 +266,15 @@
 			data.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()));
 		});
 		return data;
-	}
+	};
 
 	/**
 	 * Show the graph
 	 */
 	var initGraph = function() {
-		graph ? graph.destroy() : null;
+    if (graph) {
+      graph.destroy();
+    }
 		var ctx = document.getElementById('graph').getContext('2d');
 		Chart.defaults.global.responsive = true;
 		graph = new Chart(ctx).Line({
@@ -301,7 +301,7 @@
 			multiTooltipTemplate: "<%= datasetLabel %>: <%= value %> minutes",
 			tooltipTitleFontFamily: '-apple-system, system, sans-serif'
 		});
-	}
+	};
 
 	/**
 	 * logging your own estimate
@@ -335,7 +335,7 @@
 				initGraph();
 			}
 		});
-	}
+	};
 
 	/**
 	 * The google distance matrix api used server side with a php mirror
@@ -364,7 +364,7 @@
 		req.open('POST',address);
 		req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		req.send(params);
-	}
+	};
 
 	/**
 	 * The google directions service api
@@ -391,7 +391,7 @@
 				notice('Directions request failed due to ' + status);
 			}
 		});
-	}
+	};
 
 	/**
 	 * Save the graph and display it
@@ -423,7 +423,7 @@
 		var images = JSON.parse(localStorage.getItem('images')) || [];
 		images.push(img);
 		localStorage.setItem('images',JSON.stringify(images));
-	}
+	};
 
 	// cookie notice
 	if (!localStorage.getItem('cookie'))  {
@@ -446,12 +446,12 @@
 		initLog();
 		if (localStorage.getItem('to') && localStorage.getItem('from') && localStorage.getItem('mode')) {
 			document.getElementById('submit').click();
-		};
+		}
 		initGraph();
 		document.querySelector('.extra--save').addEventListener('click',function(){
 			saveGraph();
 		});
-	}
+	};
 
 	/*
 	 * google analytics
@@ -459,7 +459,7 @@
 	window.ga = window.ga || function() {
 		(ga.q = ga.q||[]).push(arguments);
 	};
-	ga.l = +new Date;
+	ga.l = +new Date();
 	ga('create', 'UA-27277115-3', 'auto');
 	ga('send', 'pageview');
 
