@@ -3,7 +3,8 @@ $images = array(); // An array which will hold all our images
 $di = new DirectoryIterator(__DIR__);
 foreach ($di as $file) {
   if (!$file->isDot() && !$file->isDir()) {
-    if ($file->getExtension() === 'png') {
+    // needs to be larger than 8kb, because sometimes empty images get saved, and they are 7.9kb
+    if ($file->getExtension() === 'png' && filesize(__DIR__ . '/' . $file->getFilename()) > 8000) {
       $images [] = './' . $file;
     }
   }
@@ -39,10 +40,13 @@ rsort($images);
   <div class="content">
     <p>Here you can see all the images that have been saved to this point.</p>
     <p>Beware: this can be slow to load if there are a lot of images</p>
-    <?php
+    <div class="extra">
+    <div class="extra--container"><img src="1450814573587.png"></img></div>
+      <?php
     foreach ($images as $img) {
        echo '<div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
      } ?>
+    </div>
   </div>
   <footer>
     <p>Made by <a href="https://haroen.me">Haroen Viaene</a> | code on <a href="https://github.com/haroenv/maps-checker">GitHub</a></p>
