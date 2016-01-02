@@ -26,4 +26,6 @@ Haroen Viaene's [notice](https://github.com/haroenv/notice) [![Creative Commons 
 Haroen Viaene's [modal](https://github.com/haroenv/modal) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/).
 
 
-[Chartjs](http://www.chartjs.org/) (MIT)
+[Chart.js](http://www.chartjs.org/) by @nnnick (MIT)
+
+[Chart.Scatter](https://github.com/dima117/Chart.Scatter) by @dima117 (MIT)
