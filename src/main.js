@@ -233,37 +233,30 @@
 
 	/**
 	 * get the values the logs stored in localStorage
-	 * @return {array} the values
+	 * @return {array} the values, {x:date of measurement, y: value}
 	 */
 	var getDataValues = function() {
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
-			data.push(e.value);
+			data.push({
+				x: e.time,
+				y: e.value
+			});
 		});
 		return data;
 	};
 
 	/**
 	 * get the values of Google maps the logs stored in localStorage
-	 * @return {array} the values
+	 * @return {array} the values, {x:date of measurement, y: value}
 	 */
 	var getDataGoogleValues = function() {
 		var data = [];
 		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
-			data.push(e.google);
-		});
-		return data;
-	};
-
-	/**
-	 * Get the times stored in localStorage
-	 * @return {array} the times a log occured
-	 */
-	var getDataTimes = function() {
-		var data = [];
-		(JSON.parse(localStorage.getItem('data')) || []).forEach(function(e,i){
-			var date = new Date(e.time);
-			data.push(date.getDate() + '-' + (date.getMonth() + 1) + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()));
+			data.push({
+				x: e.time,
+				y: e.google
+			});
 		});
 		return data;
 	};
@@ -277,29 +270,35 @@
     }
 		var ctx = document.getElementById('graph').getContext('2d');
 		Chart.defaults.global.responsive = true;
-		graph = new Chart(ctx).Line({
-			labels: getDataTimes(),
+		graph = new Chart(ctx).Scatter({
 			datasets: [{
 				label: 'Your data',
-				fillColor: '#F44336',
+				fillColor: '#F44336', // this doesn't work
 				strokeColor: '#F44336',
-				pointHighlightFill: '#F44336',
+				pointHighlightFill: '#F44336', // this doesn't work
 				data: getDataValues()
 			}, {
 				label: 'Google Maps',
-				fillColor: 'rgba(0,0,0,0)',
+				fillColor: 'rgba(0,0,0,0)', // this doesn't work
 				strokeColor: '#000',
-				pointHighlightFill: '#000',
+				pointHighlightFill: '#000', // this doesn't work
 				data: getDataGoogleValues()
 			}]
 		}, {
-			bezierCurveTension: 0.3,
-			pointDot: false,
-			datasetStroke: false,
+			bezierCurveTension: 0.3, // this doesn't work
+			pointDot: true,
 			datasetStrokeWidth: 0,
-			datasetFill: true,
-			multiTooltipTemplate: "<%= datasetLabel %>: <%= value %> minutes",
-			tooltipTitleFontFamily: '-apple-system, system, sans-serif'
+			datasetFill: true, // this doesn't work
+			tooltipTitleFontFamily: '-apple-system, system, sans-serif',
+			showScale: true,
+      scaleShowVerticalLines: false,
+      scaleLabel: "<%=value%>min",
+      scaleDateFormat: "mm/yyyy",
+      scaleTimeFormat: "HH:MM",
+      scaleDateTimeFormat: "HH:MM",
+      useUtc: false,
+      scaleType: 'date',
+      animation: true,
 		});
 	};
 
@@ -447,7 +446,6 @@
 		if (localStorage.getItem('to') && localStorage.getItem('from') && localStorage.getItem('mode')) {
 			document.getElementById('submit').click();
 		}
-		initGraph();
 		document.querySelector('.extra--save').addEventListener('click',function(){
 			saveGraph();
 		});
