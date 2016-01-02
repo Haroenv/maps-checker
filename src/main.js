@@ -398,11 +398,12 @@
 	var saveGraph = function() {
 		var extra = document.querySelector('.extra');
 		var img = document.createElement('img');
-		var container = document.createElement('div');
+		var container = document.createElement('figure');
 		container.className += 'extra--container';
 		img.className += 'extra--image';
 		var src = graph.toBase64Image();
 		img.src = src;
+		img.alt = 'chart saved at ' + new Date().getTime();
 		container.appendChild(img);
 		extra.appendChild(container);
 

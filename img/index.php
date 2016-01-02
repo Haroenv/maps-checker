@@ -43,7 +43,7 @@ rsort($images);
     <div class="extra">
 <?php
 foreach ($images as $img) {
-  echo '      <div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
+  echo '      <figure class="extra--container"><img src="' .  $img . '" alt="saved chart."></figure>' . PHP_EOL;
 } ?>
     </div>
   </div>
