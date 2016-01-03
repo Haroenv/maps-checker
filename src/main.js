@@ -285,7 +285,7 @@
 				data: getDataGoogleValues()
 			}]
 		}, {
-			bezierCurveTension: 0.3, // this doesn't work
+            bezierCurve: false,
 			pointDot: true,
 			datasetStrokeWidth: 0,
 			datasetFill: true, // this doesn't work
