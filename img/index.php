@@ -43,10 +43,10 @@ rsort($images);
     <div class="extra">
 <?php
 foreach ($images as $img) {
-  echo '      <figure class="extra--container">' . PHP_EOL;
+  echo '      <div class="extra--container">' . PHP_EOL;
   echo '        <img src="' .  $img . '" alt="saved chart.">' . PHP_EOL;
   //echo '        <figcaption>Saved at ' . date(preg_replace('/(.png)|(.\/)/', '', $img)) . '</figcaption>' . PHP_EOL;
-  echo '      </figure>' . PHP_EOL;
+  echo '      </div>' . PHP_EOL;
 } ?>
     </div>
   </div>
