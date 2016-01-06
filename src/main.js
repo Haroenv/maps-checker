@@ -405,7 +405,7 @@
 		var src = graph.toBase64Image();
 		img.src = src;
 		img.alt = 'A chart saved at ' + new Date().getTime();
-		description.innerHTML = 'A chart saved at ' + new Date().getTime();
+		description.innerHTML = 'Saved at ' + new Date().getTime();
 		container.appendChild(img);
 		container.appendChild(description);
 		extra.appendChild(container);
