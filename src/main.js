@@ -399,12 +399,15 @@
 		var extra = document.querySelector('.extra');
 		var img = document.createElement('img');
 		var container = document.createElement('figure');
+		var description = document.createElement('figcaption');
 		container.className += 'extra--container';
 		img.className += 'extra--image';
 		var src = graph.toBase64Image();
 		img.src = src;
-		img.alt = 'chart saved at ' + new Date().getTime();
+		img.alt = 'A chart saved at ' + new Date().getTime();
+		description.innerHTML = 'A chart saved at ' + new Date().getTime();
 		container.appendChild(img);
+		container.appendChild(description);
 		extra.appendChild(container);
 
 		/* save the image to a /img/timestamp.png */

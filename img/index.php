@@ -47,7 +47,7 @@ Saved image page
         $timestamp = floor(preg_replace('/(.png)|(.\/)/', '', $img)/1000);
         echo '      <figure class="extra--container">' . PHP_EOL;
         echo '        <img src="' .  $img . '" alt="saved chart.">' . PHP_EOL;
-        echo '        <figcaption>Saved at ' . date('h:m, d F Y',$timestamp) . ': '. $timestamp . '</figcaption>' . PHP_EOL;
+        echo '        <figcaption>Saved at ' . date('h:m, d F Y',$timestamp) . '</figcaption>' . PHP_EOL;
         echo '      </figure>' . PHP_EOL;
       } ?>
     </div>
