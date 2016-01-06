@@ -405,8 +405,8 @@
 		img.className += 'extra--image';
 		var src = graph.toBase64Image();
 		img.src = src;
-		img.alt = 'A chart saved at ' + now.toLocaleTimeString() + ' '+ now.toLocaleDateString();
-		description.innerHTML = 'Saved at ' + now.toLocaleTimeString() + ' '+ now.toLocaleDateString();
+		img.alt = 'A chart saved at ' + now.getHours() + ':' + now.getMinutes() + ', '+ now.toLocaleDateString();
+		description.innerHTML = 'Saved at ' + now.getHours() + ':' + now.getMinutes() + ', '+ now.toLocaleDateString();
 		container.appendChild(img);
 		container.appendChild(description);
 		extra.appendChild(container);
