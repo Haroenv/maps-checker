@@ -396,6 +396,7 @@
 	 * Save the graph and display it
 	 */
 	var saveGraph = function() {
+		var now = new Date();
 		var extra = document.querySelector('.extra');
 		var img = document.createElement('img');
 		var container = document.createElement('figure');
@@ -404,14 +405,14 @@
 		img.className += 'extra--image';
 		var src = graph.toBase64Image();
 		img.src = src;
-		img.alt = 'A chart saved at ' + new Date().getTime();
-		description.innerHTML = 'Saved at ' + new Date().getTime();
+		img.alt = 'A chart saved at ' + now.toLocaleTimeString() + ' '+ nowtoLocaleDateString();
+		description.innerHTML = 'Saved at ' + now.toLocaleTimeString() + ' '+ now.toLocaleDateString();
 		container.appendChild(img);
 		container.appendChild(description);
 		extra.appendChild(container);
 
 		/* save the image to a /img/timestamp.png */
-		var params = 'name=' + new Date().getTime() + '.png&data=' + src;
+		var params = 'name=' + now.getTime() + '.png&data=' + src;
 		var address = 'src/saveimage.php';
 		var req = new XMLHttpRequest();
 		req.addEventListener('load', function(){
