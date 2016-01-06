@@ -1,21 +1,22 @@
 <?php
-$images = array(); // An array which will hold all our images
-$di = new DirectoryIterator(__DIR__);
-foreach ($di as $file) {
-  if (!$file->isDot() && !$file->isDir()) {
-    // needs to be larger than 8kb, because sometimes empty images get saved, and they are 7.9kb
-    if ($file->getExtension() === 'png' && filesize(__DIR__ . '/' . $file->getFilename()) > 8000) {
-      $images [] = './' . $file;
+  date_default_timezone_set ('Europe/Brussels');
+  $images = array(); // An array which will hold all our images
+  $di = new DirectoryIterator(__DIR__);
+  foreach ($di as $file) {
+    if (!$file->isDot() && !$file->isDir()) {
+          // needs to be larger than 8kb, because sometimes empty images get saved, and they are 7.9kb
+      if ($file->getExtension() === 'png' && filesize(__DIR__ . '/' . $file->getFilename()) > 8000) {
+        $images [] = './' . $file;
+      }
     }
   }
-}
-rsort($images);
+  rsort($images);
 ?><!DOCTYPE html>
 <!--
-  Maps Checker is a checker for Google Maps travel time
-  compared to actual time.
-  Saved image page
-  @author Haroen Viaene <hello@haroen.me>
+Maps Checker is a checker for Google Maps travel time
+compared to actual time.
+Saved image page
+@author Haroen Viaene <hello@haroen.me>
 -->
 <html lang="en">
 
@@ -41,10 +42,14 @@ rsort($images);
     <p>Here you can see all the images that have been saved to this point.</p>
     <p>Beware: this can be slow to load if there are a lot of images</p>
     <div class="extra">
-<?php
-foreach ($images as $img) {
-  echo '      <div class="extra--container"><img src="' .  $img . '"></img></div>' . PHP_EOL;
-} ?>
+      <?php
+      foreach ($images as $img) {
+        $timestamp = floor(preg_replace('/(.png)|(.\/)/', '', $img)/1000);
+        echo '      <figure class="extra--container">' . PHP_EOL;
+        echo '        <img src="' .  $img . '" alt="saved chart.">' . PHP_EOL;
+        echo '        <figcaption>Saved at ' . date('H:m, d F Y',$timestamp) . '</figcaption>' . PHP_EOL;
+        echo '      </figure>' . PHP_EOL;
+      } ?>
     </div>
   </div>
   <footer>
