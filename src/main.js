@@ -398,7 +398,7 @@
 	var saveGraph = function() {
 		var extra = document.querySelector('.extra');
 		var img = document.createElement('img');
-		var container = document.createElement('figure');
+		var container = document.createElement('div');
 		container.className += 'extra--container';
 		img.className += 'extra--image';
 		var src = graph.toBase64Image();
