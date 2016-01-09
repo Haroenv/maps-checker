@@ -18,6 +18,8 @@ This is also configured to be able to be deployed on [heroku](heroku.com), where
 
 You can get the Google distance matrix api key here [](https://developers.google.com/maps/documentation/distance-matrix/intro).
 
+The site is built to run with Jekyll, but you can also copy the output to any php/html host.
+
 # License
 
 [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
