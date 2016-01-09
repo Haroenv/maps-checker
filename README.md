@@ -2,16 +2,21 @@
 
 A comparison between google maps travel time and actual travel time.
 
-Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), taught by Rogier van der Linde
+Made for the course WebScripting 1 (Clientside) at Odisee (Ghent), lectorer by Rogier van der Linde
 
-Live version at http://haroenviaene.ikdoeict.be/maps and https://maps-checker.herokuapp.com
+Live version at <http://haroenviaene.ikdoeict.be/maps> and <https://maps-checker.herokuapp.com>
 
-There's also a github pages version that won't run all the php things at https://haroen.me/maps-checker (which is needed for `distance_in_traffic` and saving images).
+There's also a github pages version that won't run all the php things at <https://haroen.me/maps-checker> (which is needed for `distance_in_traffic` and saving images).
 
 # making it run
 
 1. you'll need a php host to host `distancematrix.php`
 2. you'll need to enter your own direction matrix api key in `config.json`
+3. please also edit the google maps api in `index.html` (`key=AIzaSyCEQ1T-D7ojKNqDtm6Nop_nvScIn-CofG8`) to one you request yourself.
+
+This is also configured to be able to be deployed on [heroku](heroku.com), where you can put the api key as an environment variable.
+
+You can get the Google distance matrix api key here [](https://developers.google.com/maps/documentation/distance-matrix/intro).
 
 # License
 
