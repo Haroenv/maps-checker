@@ -36,3 +36,13 @@ Haroen Viaene's [modal](https://github.com/haroenv/modal) [![Creative Commons Li
 [Chart.js](http://www.chartjs.org/) by @nnnick (MIT)
 
 [Chart.Scatter](https://github.com/dima117/Chart.Scatter) by @dima117 (MIT)
+
+# Source
+
+The source code is visible on [github.com/haroenv/maps-checker](https://github.com/haroenv/maps-checker). You can clone this using git:
+
+`git clone https://github.com/Haroenv/maps-checker.git`
+
+Or using wget:
+
+`wget https://github.com/Haroenv/maps-checker/archive/gh-pages.zip`
