@@ -2,3 +2,6 @@
 _site/
 config.json
 vendor
+# other
+*.zip
+.DS_Store
