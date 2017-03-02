@@ -291,14 +291,14 @@
 			datasetFill: true, // this doesn't work
 			tooltipTitleFontFamily: '-apple-system, system, sans-serif',
 			showScale: true,
-      scaleShowVerticalLines: false,
-      scaleLabel: "<%=value%>min",
-      scaleDateFormat: "mm/yyyy",
-      scaleTimeFormat: "HH:MM",
-      scaleDateTimeFormat: "HH:MM",
-      useUtc: false,
-      scaleType: 'date',
-      animation: true,
+			scaleShowVerticalLines: false,
+			scaleLabel: "<%=value%>min",
+			scaleDateFormat: "mm/yyyy",
+			scaleTimeFormat: "HH:MM",
+			scaleDateTimeFormat: "HH:MM",
+			useUtc: false,
+			scaleType: 'date',
+			animation: true,
 		});
 	};
 
@@ -455,16 +455,6 @@
 			saveGraph();
 		});
 	};
-
-	/*
-	 * google analytics
-	 */
-	window.ga = window.ga || function() {
-		(ga.q = ga.q||[]).push(arguments);
-	};
-	ga.l = +new Date();
-	ga('create', 'UA-27277115-3', 'auto');
-	ga('send', 'pageview');
 
 	/*
 	 * listener on resize to reload graph
